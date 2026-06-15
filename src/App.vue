@@ -1,7 +1,10 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import TheHeader from './components/TheHeader.vue'
+import TheFooter from './components/TheFooter.vue'
 </script>
 
 <template>
-  <HelloWorld />
+  <TheHeader />
+  <router-view />
+  <TheFooter />
 </template>
