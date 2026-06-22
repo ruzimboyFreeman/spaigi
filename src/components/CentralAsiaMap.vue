@@ -21,6 +21,45 @@ const particles = [
 ]
 
 const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
+
+// --- Dotted Central Asia landmass behind the globe -------------------------
+// Rough outline of the region (Kazakhstan north, the -stans below, Caspian
+// indent on the west) in the 440×440 viewBox, kept inside the globe circle.
+const region = [
+  [72, 152], [96, 110], [140, 84], [200, 74], [262, 78], [316, 92], [356, 122],
+  [360, 162], [342, 196], [330, 216],
+  [316, 252], [292, 300], [262, 326],
+  [216, 332], [160, 330], [120, 306],
+  [100, 266], [122, 236], [96, 206], [80, 176],
+]
+
+function inPoly(x, y, poly) {
+  let inside = false
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [xi, yi] = poly[i], [xj, yj] = poly[j]
+    const hit = (yi > y) !== (yj > y) &&
+      x < ((xj - xi) * (y - yi)) / (yj - yi) + xi
+    if (hit) inside = !inside
+  }
+  return inside
+}
+
+// Generate a dense, slightly offset dot grid clipped to the region polygon
+// and to the globe circle (centre 220,220 r170).
+const mapDots = (() => {
+  const dots = []
+  const step = 9
+  for (let row = 0, y = 80; y <= 334; y += step, row++) {
+    const offset = row % 2 ? step / 2 : 0
+    for (let x = 70 + offset; x <= 362; x += step) {
+      const dx = x - 220, dy = y - 220
+      if (dx * dx + dy * dy > 166 * 166) continue        // inside the globe
+      if (!inPoly(x, y, region)) continue                 // inside Central Asia
+      dots.push({ x, y, r: 1.5 })
+    }
+  }
+  return dots
+})()
 </script>
 
 <template>
@@ -44,6 +83,12 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
 
     <!-- ambient glow -->
     <circle cx="220" cy="220" r="210" fill="url(#caGlow)" class="breathe" />
+
+    <!-- dotted Central Asia map sitting behind the globe network -->
+    <g clip-path="url(#caClip)" class="ca-basemap">
+      <circle v-for="(d, i) in mapDots" :key="'md' + i"
+        :cx="d.x" :cy="d.y" :r="d.r" fill="#5aa6ff" />
+    </g>
 
     <!-- rotating AI orbit rings -->
     <g class="orbit orbit-a">
@@ -111,6 +156,10 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
   height: 100%;
   display: block;
   background: transparent; /* blend into the hero background */
+}
+/* faint dotted regional map behind the network */
+.ca-basemap {
+  opacity: 0.5;
 }
 .lbl {
   fill: #c1ccd6;

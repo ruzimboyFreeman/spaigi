@@ -84,8 +84,8 @@ import CentralAsiaMap from './CentralAsiaMap.vue'
 .hero-inner {
   position: relative;
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 56px;
+  grid-template-columns: 1fr 1.12fr;
+  gap: 80px;
   align-items: center;
 }
 .hero-visual {
