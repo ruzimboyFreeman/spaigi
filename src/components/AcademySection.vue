@@ -148,7 +148,7 @@ const lookingFor = [
   right: -50px;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(47, 143, 255, 0.25), transparent 70%);
+  background: radial-gradient(circle, rgba(195, 244, 153, 0.25), transparent 70%);
 }
 .hiring-tag {
   display: inline-flex;
@@ -165,16 +165,16 @@ const lookingFor = [
   height: 8px;
   border-radius: 50%;
   background: var(--gold-soft);
-  box-shadow: 0 0 0 0 rgba(109, 184, 255, 0.6);
+  box-shadow: 0 0 0 0 rgba(214, 247, 176, 0.6);
   animation: blink 1.8s ease-out infinite;
 }
 @keyframes blink {
   0% {
-    box-shadow: 0 0 0 0 rgba(109, 184, 255, 0.55);
+    box-shadow: 0 0 0 0 rgba(214, 247, 176, 0.55);
   }
   70%,
   100% {
-    box-shadow: 0 0 0 9px rgba(109, 184, 255, 0);
+    box-shadow: 0 0 0 9px rgba(214, 247, 176, 0);
   }
 }
 .hiring-title {
@@ -197,7 +197,7 @@ const lookingFor = [
   font-weight: 600;
   color: var(--gold-soft);
   background: var(--gold-bg);
-  border: 1px solid rgba(109, 184, 255, 0.25);
+  border: 1px solid rgba(214, 247, 176, 0.25);
   padding: 6px 14px;
   border-radius: 999px;
 }

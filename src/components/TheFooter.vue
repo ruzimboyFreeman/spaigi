@@ -66,7 +66,7 @@ const cols = [
 
 <style scoped>
 .ftr {
-  background: #060c16;
+  background: #21372f;
   color: var(--text-on-ink);
   padding: 72px 0 32px;
 }

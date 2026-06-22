@@ -28,16 +28,16 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
     aria-label="AI network across Central Asia">
     <defs>
       <radialGradient id="caGlow" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#2f8fff" stop-opacity="0.4" />
-        <stop offset="100%" stop-color="#2f8fff" stop-opacity="0" />
+        <stop offset="0%" stop-color="#c3f499" stop-opacity="0.4" />
+        <stop offset="100%" stop-color="#c3f499" stop-opacity="0" />
       </radialGradient>
       <linearGradient id="caLine" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#6db8ff" />
-        <stop offset="100%" stop-color="#2f8fff" />
+        <stop offset="0%" stop-color="#d6f7b0" />
+        <stop offset="100%" stop-color="#c3f499" />
       </linearGradient>
       <linearGradient id="caScan" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="#6db8ff" stop-opacity="0" />
-        <stop offset="100%" stop-color="#6db8ff" stop-opacity="0.28" />
+        <stop offset="0%" stop-color="#d6f7b0" stop-opacity="0" />
+        <stop offset="100%" stop-color="#d6f7b0" stop-opacity="0.28" />
       </linearGradient>
       <clipPath id="caClip"><circle cx="220" cy="220" r="170" /></clipPath>
     </defs>
@@ -48,11 +48,11 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
     <!-- rotating AI orbit rings -->
     <g class="orbit orbit-a">
       <ellipse cx="220" cy="220" rx="206" ry="80" fill="none"
-        stroke="rgba(109, 184, 255,0.18)" stroke-width="1" />
+        stroke="rgba(214, 247, 176,0.18)" stroke-width="1" />
     </g>
     <g class="orbit orbit-b">
       <ellipse cx="220" cy="220" rx="200" ry="74" fill="none"
-        stroke="rgba(47, 143, 255,0.16)" stroke-width="1" />
+        stroke="rgba(195, 244, 153,0.16)" stroke-width="1" />
     </g>
 
     <!-- globe + rotating scan sweep -->
@@ -61,15 +61,15 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
         <path d="M220,220 L220,46 A174,174 0 0,1 392,168 Z" fill="url(#caScan)" />
       </g>
     </g>
-    <circle cx="220" cy="220" r="170" fill="none" stroke="rgba(109, 184, 255,0.22)" stroke-width="1.2" />
-    <ellipse cx="220" cy="220" rx="170" ry="64" fill="none" stroke="rgba(109, 184, 255,0.14)" stroke-width="1" />
-    <ellipse cx="220" cy="220" rx="64" ry="170" fill="none" stroke="rgba(109, 184, 255,0.14)" stroke-width="1" />
-    <line x1="50" y1="220" x2="390" y2="220" stroke="rgba(109, 184, 255,0.14)" stroke-width="1" />
+    <circle cx="220" cy="220" r="170" fill="none" stroke="rgba(214, 247, 176,0.22)" stroke-width="1.2" />
+    <ellipse cx="220" cy="220" rx="170" ry="64" fill="none" stroke="rgba(214, 247, 176,0.14)" stroke-width="1" />
+    <ellipse cx="220" cy="220" rx="64" ry="170" fill="none" stroke="rgba(214, 247, 176,0.14)" stroke-width="1" />
+    <line x1="50" y1="220" x2="390" y2="220" stroke="rgba(214, 247, 176,0.14)" stroke-width="1" />
 
     <!-- particles -->
     <g class="particles">
       <circle v-for="(p, i) in particles" :key="'p' + i" :cx="p.x" :cy="p.y" :r="p.r"
-        fill="#6db8ff" :style="{ animationDelay: p.d + 's' }" />
+        fill="#d6f7b0" :style="{ animationDelay: p.d + 's' }" />
     </g>
 
     <!-- connections (data flow) -->
@@ -81,25 +81,25 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
     </g>
 
     <!-- traveling AI data packets -->
-    <circle v-for="(c, i) in countries" :key="'pk-' + c.id" r="3.2" fill="#d6e9ff"
+    <circle v-for="(c, i) in countries" :key="'pk-' + c.id" r="3.2" fill="#eafbcf"
       class="packet" :style="{ offsetPath: pathFor(c), animationDelay: i * 0.55 + 's' }" />
 
     <!-- neighbour nodes (re-materialise on a loop) -->
     <g v-for="(c, i) in countries" :key="c.id" class="node"
       :style="{ animationDelay: 0.4 + i * 0.5 + 's' }">
       <circle :cx="c.x" :cy="c.y" r="13" class="ping" fill="none"
-        stroke="#6db8ff" stroke-width="1.2" :style="{ animationDelay: i * 0.5 + 's' }" />
-      <circle :cx="c.x" :cy="c.y" r="11" fill="rgba(47, 143, 255,0.16)" />
-      <circle :cx="c.x" :cy="c.y" r="5" fill="#6db8ff" />
+        stroke="#d6f7b0" stroke-width="1.2" :style="{ animationDelay: i * 0.5 + 's' }" />
+      <circle :cx="c.x" :cy="c.y" r="11" fill="rgba(195, 244, 153,0.16)" />
+      <circle :cx="c.x" :cy="c.y" r="5" fill="#d6f7b0" />
       <text :x="c.x" :y="c.y - 18" class="lbl">{{ c.name }}</text>
     </g>
 
     <!-- Uzbekistan (hub) -->
     <g class="hub">
       <circle :cx="uz.x" :cy="uz.y" r="14" class="pulse" fill="none"
-        stroke="#6db8ff" stroke-width="1.5" />
-      <circle :cx="uz.x" :cy="uz.y" r="20" fill="rgba(47, 143, 255,0.2)" />
-      <circle :cx="uz.x" :cy="uz.y" r="9" fill="#2f8fff" stroke="#d6e9ff" stroke-width="2" />
+        stroke="#d6f7b0" stroke-width="1.5" />
+      <circle :cx="uz.x" :cy="uz.y" r="20" fill="rgba(195, 244, 153,0.2)" />
+      <circle :cx="uz.x" :cy="uz.y" r="9" fill="#c3f499" stroke="#eafbcf" stroke-width="2" />
       <text :x="uz.x" :y="uz.y + 38" class="lbl hub-lbl">{{ uz.name }}</text>
     </g>
   </svg>
@@ -121,7 +121,7 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
   letter-spacing: 0.02em;
 }
 .hub-lbl {
-  fill: #6db8ff;
+  fill: #d6f7b0;
   font-size: 15px;
   font-weight: 700;
 }

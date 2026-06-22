@@ -94,7 +94,7 @@ const centers = [
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 28px;
 }
 .card {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
@@ -106,7 +106,7 @@ const centers = [
 .card:hover {
   transform: translateY(-5px);
   border-color: var(--gold);
-  background: linear-gradient(180deg, rgba(47, 143, 255, 0.12), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(180deg, rgba(195, 244, 153, 0.12), rgba(255, 255, 255, 0.02));
 }
 .icon {
   width: 54px;

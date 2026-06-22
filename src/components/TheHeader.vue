@@ -48,9 +48,15 @@ const go = () => (open.value = false)
   z-index: 100;
   transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   border-bottom: 1px solid transparent;
+  /* keep the bar pinned on mobile (avoids fixed + backdrop-filter lag on iOS) */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 .hdr.solid {
   background: rgba(246, 244, 238, 0.86);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
   backdrop-filter: saturate(140%) blur(14px);
   border-bottom-color: var(--line);
 }
@@ -75,7 +81,7 @@ const go = () => (open.value = false)
   background: #fff;
   padding: 4px 9px;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(10, 19, 34, 0.16);
+  box-shadow: 0 2px 10px rgba(47, 87, 77, 0.16);
 }
 .brand-text {
   display: flex;

@@ -185,7 +185,7 @@ const centers = [
   right: -120px;
   width: 520px;
   height: 520px;
-  background: radial-gradient(circle, rgba(47, 143, 255, 0.3), transparent 65%);
+  background: radial-gradient(circle, rgba(195, 244, 153, 0.3), transparent 65%);
   filter: blur(20px);
   z-index: -1;
 }

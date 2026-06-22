@@ -1,6 +1,4 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-
 const director = {
   name: 'Dr. Mansur Omonov',
   role: 'Director · Founder & CEO',
@@ -22,77 +20,6 @@ const team = [
   { name: 'Mr. Muhammad Samadov', role: 'Researcher · Scholar / Analyst', photo: '/img/team-muhammad.jpg' },
   { name: 'Ms. Mehrangiz Samadova', role: 'Researcher · Scholar / Analyst', photo: '/img/team-mehrangiz.jpg' },
 ]
-
-// Duplicated list so the slider can loop seamlessly in both directions.
-const loop = [...team, ...team]
-
-const viewport = ref(null)
-let raf = 0
-let half = 0
-let dragging = false
-let hovering = false
-let lastX = 0
-const SPEED = 0.55 // px per frame for the gentle auto-scroll
-let reduce = false
-
-function measure() {
-  if (viewport.value) half = viewport.value.scrollWidth / 2
-}
-
-// Keep scrollLeft inside one set's width so the loop is seamless both ways.
-function wrap() {
-  const el = viewport.value
-  if (!el || !half) return
-  if (el.scrollLeft >= half) el.scrollLeft -= half
-  else if (el.scrollLeft <= 0) el.scrollLeft += half
-}
-
-function tick() {
-  const el = viewport.value
-  if (el && !dragging && !hovering && !reduce) {
-    el.scrollLeft += SPEED
-    wrap()
-  }
-  raf = requestAnimationFrame(tick)
-}
-
-function onDown(e) {
-  dragging = true
-  lastX = e.clientX
-  viewport.value?.classList.add('dragging')
-  viewport.value?.setPointerCapture?.(e.pointerId)
-}
-
-function onMove(e) {
-  if (!dragging) return
-  const dx = e.clientX - lastX
-  lastX = e.clientX
-  viewport.value.scrollLeft -= dx // drag right → reveal previous
-  wrap()
-}
-
-function onUp(e) {
-  if (!dragging) return
-  dragging = false
-  viewport.value?.classList.remove('dragging')
-  viewport.value?.releasePointerCapture?.(e.pointerId)
-}
-
-onMounted(() => {
-  reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || false
-  measure()
-  // Re-measure once portraits have loaded / on resize.
-  setTimeout(measure, 600)
-  window.addEventListener('load', measure)
-  window.addEventListener('resize', measure)
-  raf = requestAnimationFrame(tick)
-})
-
-onBeforeUnmount(() => {
-  cancelAnimationFrame(raf)
-  window.removeEventListener('load', measure)
-  window.removeEventListener('resize', measure)
-})
 </script>
 
 <template>
@@ -131,33 +58,19 @@ onBeforeUnmount(() => {
         </div>
       </article>
 
-      <div
-        class="marquee"
-        ref="viewport"
-        v-reveal
-        @pointerdown="onDown"
-        @pointermove="onMove"
-        @pointerup="onUp"
-        @pointercancel="onUp"
-        @pointerleave="onUp"
-        @mouseenter="hovering = true"
-        @mouseleave="hovering = false"
-      >
-        <div class="track">
-          <article
-            v-for="(m, i) in loop"
-            :key="i"
-            class="member"
-          >
-            <div class="photo-wrap">
-              <img :src="m.photo" :alt="m.name" class="photo" draggable="false" />
-            </div>
-            <h4>{{ m.name }}</h4>
-            <p>{{ m.role }}</p>
-          </article>
-        </div>
+      <div class="grid" v-reveal>
+        <article
+          v-for="m in team"
+          :key="m.name"
+          class="member"
+        >
+          <div class="photo-wrap">
+            <img :src="m.photo" :alt="m.name" class="photo" />
+          </div>
+          <h4>{{ m.name }}</h4>
+          <p>{{ m.role }}</p>
+        </article>
       </div>
-      <p class="hint" v-reveal>← drag to explore the team →</p>
       <p class="openings" v-reveal>
         Open positions: <strong>Deputy of Director</strong> ·
         <strong>Manager, Center for Strategic Policy &amp; Geopolitics</strong> —
@@ -296,32 +209,13 @@ onBeforeUnmount(() => {
   color: var(--text-muted);
 }
 
-/* ---- Draggable auto-scrolling slider (right → left) ---- */
-.marquee {
-  overflow-x: auto;
-  overflow-y: hidden;
-  cursor: grab;
-  user-select: none;
-  touch-action: pan-y; /* allow vertical page scroll; we handle horizontal */
-  scrollbar-width: none;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
-}
-.marquee::-webkit-scrollbar {
-  display: none;
-}
-.marquee.dragging {
-  cursor: grabbing;
-}
-.track {
-  display: flex;
+/* ---- Static team grid (all members on one page) ---- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 22px;
-  width: max-content;
-  padding: 8px 2px;
 }
 .member {
-  flex: 0 0 auto;
-  width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -351,7 +245,6 @@ onBeforeUnmount(() => {
   object-fit: cover;
   object-position: top center;
   background: var(--paper-2);
-  pointer-events: none; /* let drags fall through to the slider */
 }
 .member h4 {
   font-family: var(--serif);
@@ -364,14 +257,6 @@ onBeforeUnmount(() => {
   font-size: 0.84rem;
   color: var(--text-muted);
   line-height: 1.4;
-}
-.hint {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-muted);
 }
 .openings {
   margin-top: 18px;

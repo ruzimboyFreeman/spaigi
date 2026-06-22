@@ -188,7 +188,7 @@ const approach = [
   right: -120px;
   width: 520px;
   height: 520px;
-  background: radial-gradient(circle, rgba(47, 143, 255, 0.3), transparent 65%);
+  background: radial-gradient(circle, rgba(195, 244, 153, 0.3), transparent 65%);
   filter: blur(20px);
   z-index: -1;
 }
@@ -262,7 +262,7 @@ const approach = [
 .lead-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 28px;
 }
 .lead-card {
   display: flex;
@@ -340,7 +340,7 @@ const approach = [
 .prog-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 28px;
 }
 .prog {
   background: var(--panel);
