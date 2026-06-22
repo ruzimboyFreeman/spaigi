@@ -55,10 +55,10 @@ const go = () => (open.value = false)
   will-change: transform;
 }
 .hdr.solid {
-  background: rgba(246, 244, 238, 0.86);
+  background: rgba(11, 27, 46, 0.88);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
   backdrop-filter: saturate(140%) blur(14px);
-  border-bottom-color: var(--line);
+  border-bottom-color: var(--line-ink);
 }
 .hdr-inner {
   display: flex;
@@ -101,12 +101,6 @@ const go = () => (open.value = false)
   color: var(--text-on-ink);
   margin-top: 5px;
 }
-.hdr.solid .brand-text strong {
-  color: var(--text-strong);
-}
-.hdr.solid .brand-text small {
-  color: var(--text-muted);
-}
 .nav {
   display: flex;
   align-items: center;
@@ -118,9 +112,6 @@ const go = () => (open.value = false)
   color: var(--text-on-ink);
   position: relative;
   transition: color 0.18s ease;
-}
-.hdr.solid .nav a {
-  color: var(--text);
 }
 .nav a:not(.nav-cta)::after {
   content: '';
@@ -135,10 +126,14 @@ const go = () => (open.value = false)
 .nav a:not(.nav-cta):hover {
   color: var(--gold-soft);
 }
-.hdr.solid .nav a:not(.nav-cta):hover {
-  color: var(--text-strong);
-}
 .nav a:not(.nav-cta):hover::after {
+  width: 100%;
+}
+/* active menu item: persistent underline + highlighted colour */
+.nav a:not(.nav-cta).router-link-exact-active {
+  color: var(--gold-soft);
+}
+.nav a:not(.nav-cta).router-link-exact-active::after {
   width: 100%;
 }
 .nav-cta {
@@ -167,9 +162,6 @@ const go = () => (open.value = false)
   height: 2px;
   background: var(--text-on-ink-strong);
   transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease;
-}
-.hdr.solid .burger span {
-  background: var(--ink);
 }
 .burger.open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
