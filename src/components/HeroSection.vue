@@ -77,7 +77,7 @@ import CentralAsiaMap from './CentralAsiaMap.vue'
   right: -120px;
   width: 540px;
   height: 540px;
-  background: radial-gradient(circle, rgba(195, 244, 153, 0.32), transparent 65%);
+  background: radial-gradient(circle, rgba(47, 143, 255, 0.32), transparent 65%);
   filter: blur(20px);
   z-index: -1;
 }
@@ -106,7 +106,7 @@ import CentralAsiaMap from './CentralAsiaMap.vue'
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(47, 87, 77, 0.55);
+  background: rgba(10, 19, 34, 0.55);
   backdrop-filter: blur(8px);
   border-radius: 999px;
   padding: 8px 18px 8px 8px;

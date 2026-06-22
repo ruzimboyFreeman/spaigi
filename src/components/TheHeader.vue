@@ -81,7 +81,7 @@ const go = () => (open.value = false)
   background: #fff;
   padding: 4px 9px;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(47, 87, 77, 0.16);
+  box-shadow: 0 2px 10px rgba(10, 19, 34, 0.16);
 }
 .brand-text {
   display: flex;

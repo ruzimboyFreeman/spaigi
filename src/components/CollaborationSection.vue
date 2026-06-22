@@ -105,7 +105,7 @@ const channels = [
 .ch:not(.static):hover {
   transform: translateY(-3px);
   border-color: var(--gold);
-  background: rgba(195, 244, 153, 0.1);
+  background: rgba(47, 143, 255, 0.1);
 }
 .lbl {
   font-size: 0.74rem;

@@ -174,7 +174,7 @@ const publications = [
   right: -120px;
   width: 520px;
   height: 520px;
-  background: radial-gradient(circle, rgba(195, 244, 153, 0.3), transparent 65%);
+  background: radial-gradient(circle, rgba(47, 143, 255, 0.3), transparent 65%);
   filter: blur(20px);
   z-index: -1;
 }
@@ -339,7 +339,7 @@ const publications = [
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-on-ink-strong);
-  background: rgba(47, 87, 77, 0.72);
+  background: rgba(10, 19, 34, 0.72);
   backdrop-filter: blur(6px);
   padding: 6px 12px;
   border-radius: 999px;

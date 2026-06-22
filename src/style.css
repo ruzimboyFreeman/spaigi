@@ -1,32 +1,32 @@
 :root {
-  /* Brand palette — Eduzin-inspired: forest green + lime + cream.
-     Accent vars keep their historical --gold* names but now hold the lime/green accent. */
-  --ink: #2f574d;
-  --ink-2: #294b42;
-  --ink-3: #376459;
+  /* Brand palette — Samarkand navy + turquoise (AI signal + Uzbek heritage).
+     Accent vars keep their historical --gold* names but now hold turquoise. */
+  --ink: #0b1b2e;
+  --ink-2: #102438;
+  --ink-3: #163049;
   --panel: #ffffff;
-  --paper: #f4f0e9;
-  --paper-2: #ece5d8;
-  --line: #e4ddce;
-  --line-ink: rgba(255, 255, 255, 0.14);
+  --paper: #f4f6f7;
+  --paper-2: #e8ecef;
+  --line: #dde3e7;
+  --line-ink: rgba(255, 255, 255, 0.1);
 
-  --text: #5c6b64;
-  --text-strong: #20302b;
-  --text-muted: #8a948d;
-  --text-on-ink: #cdd8d1;
-  --text-on-ink-strong: #f4f0e9;
+  --text: #3a4452;
+  --text-strong: #0b1b2e;
+  --text-muted: #66707d;
+  --text-on-ink: #c1ccd6;
+  --text-on-ink-strong: #f3f7fa;
 
-  --gold: #c3f499;        /* lime accent / primary button bg */
-  --gold-soft: #d6f7b0;   /* light lime — accents on dark green */
-  --gold-deep: #2f574d;   /* forest green — accents/links on light */
-  --gold-bg: rgba(195, 244, 153, 0.2);
+  --gold: #2f8fff;
+  --gold-soft: #6db8ff;
+  --gold-deep: #1b6fd6;
+  --gold-bg: rgba(47, 143, 255, 0.12);
 
   --maxw: 1200px;
-  --radius: 12px;
-  --radius-lg: 16px;
-  --shadow-sm: 0 1px 2px rgba(47, 87, 77, 0.05), 0 8px 22px rgba(47, 87, 77, 0.06);
-  --shadow: 0 16px 40px -16px rgba(47, 87, 77, 0.22);
-  --shadow-gold: 0 16px 34px -16px rgba(47, 87, 77, 0.4);
+  --radius: 14px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 1px 2px rgba(10, 19, 34, 0.06), 0 4px 14px rgba(10, 19, 34, 0.05);
+  --shadow: 0 10px 30px -12px rgba(10, 19, 34, 0.25);
+  --shadow-gold: 0 18px 40px -18px rgba(27, 111, 214, 0.55);
 
   --sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
   --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
