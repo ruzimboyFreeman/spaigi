@@ -1,115 +1,69 @@
 <script setup>
-// AI-motion network globe of Central Asia. Each state is a node, all linked to
-// Uzbekistan (the hub). Nodes re-materialise on a loop ("paydo bo'lsin") while
-// data packets stream along the links — an AI-website style motion.
-const countries = [
-  { id: 'kz', name: 'Kazakhstan', x: 232, y: 96 },
-  { id: 'kg', name: 'Kyrgyzstan', x: 322, y: 196 },
-  { id: 'tj', name: 'Tajikistan', x: 280, y: 312 },
-  { id: 'tm', name: 'Turkmenistan', x: 118, y: 300 },
+// Accurate Central Asia map (real country boundaries) with an AI-network motion
+// layer. Uzbekistan is the highlighted hub; the four neighbours link to it.
+const neighbors = [
+  { id: 'kaz', name: 'Kazakhstan', x: 224.2, y: 181.7, lx: 224, ly: 150,
+    d: 'M74.1,223.2 72.5,224.3 72.9,225.6Z M63.3,223.0 62.8,224.8 64.5,226.1 63.1,224.9Z M92.8,216.2 92.0,216.8 92.7,217.2Z M245.9,86.6 245.8,85.1 244.9,85.9 245.7,86.8 244.5,87.0 242.9,86.3 241.4,87.0 238.9,85.6 239.6,87.6 237.2,86.4 236.0,88.8 231.9,88.8 233.1,90.4 232.4,91.8 228.5,91.8 227.3,93.2 224.0,93.1 211.6,96.4 211.4,95.2 209.2,96.6 206.8,96.0 207.0,97.1 204.3,97.5 204.3,100.2 202.0,99.0 192.8,100.7 192.6,102.0 191.1,101.0 185.2,102.1 184.4,103.3 179.9,103.7 179.2,105.8 178.3,104.0 174.5,104.1 174.8,105.3 173.7,105.3 172.9,104.2 170.4,105.1 168.8,103.5 167.3,104.1 167.7,105.6 165.3,105.2 167.2,107.3 164.1,109.6 170.2,110.0 170.6,110.9 169.0,111.8 167.5,111.1 166.7,113.8 169.9,115.0 171.3,114.4 175.7,117.0 174.6,118.5 170.9,118.5 169.4,117.4 165.1,118.2 165.7,118.9 162.4,121.0 162.4,122.3 163.6,122.6 163.6,124.2 164.9,124.4 165.7,126.5 162.4,129.0 155.8,131.2 156.3,132.8 160.6,133.8 159.0,135.2 159.6,135.8 164.4,136.2 165.0,138.1 169.7,138.9 171.5,140.9 170.3,141.2 169.2,146.9 163.3,148.9 158.8,148.7 157.1,146.4 155.9,146.7 155.7,148.6 154.0,150.5 151.2,151.0 150.7,149.8 151.7,149.9 150.9,149.1 145.3,148.3 144.3,146.8 143.2,146.9 142.8,143.7 140.7,143.3 140.1,142.2 138.7,143.5 135.0,142.5 134.9,145.4 132.5,146.0 129.5,142.8 125.1,143.3 125.2,144.7 123.3,143.2 121.9,145.6 120.2,145.1 119.0,148.4 115.8,150.3 109.7,146.7 110.0,145.4 105.4,143.9 104.8,145.3 106.4,145.7 106.7,149.4 104.9,150.6 103.7,149.3 104.9,146.3 102.6,145.6 100.4,142.3 96.8,141.3 96.4,139.1 94.5,137.9 92.3,137.2 86.4,138.2 84.6,134.1 82.1,135.6 79.9,135.4 78.8,138.2 77.6,137.0 75.5,138.0 74.2,136.9 75.5,136.9 75.5,135.8 71.0,135.3 69.8,134.1 70.2,136.6 68.1,135.8 67.8,138.1 66.1,138.7 66.1,139.9 60.6,142.9 57.6,142.7 56.5,144.5 57.3,146.3 51.6,149.7 49.3,149.2 51.1,156.3 52.4,157.3 51.0,158.6 48.1,160.2 46.1,159.3 44.9,156.2 40.4,151.4 37.6,153.5 38.0,156.3 36.4,158.4 33.8,159.4 33.2,162.8 32.7,166.3 34.7,167.7 35.0,169.6 32.7,171.4 30.0,178.3 35.9,180.4 35.6,182.6 36.7,182.9 35.2,184.0 36.5,187.2 38.3,188.2 38.6,186.2 45.1,187.4 48.9,191.8 53.3,200.6 49.0,201.1 49.8,202.5 49.2,203.1 51.4,203.3 58.3,208.0 61.2,207.9 62.1,202.8 64.6,200.4 64.9,201.3 67.2,197.7 67.4,198.9 70.9,196.3 74.2,195.5 77.3,196.4 77.2,195.4 79.1,195.7 78.5,198.3 81.6,197.1 84.2,197.4 84.3,196.3 88.1,197.6 89.5,197.1 91.5,198.7 92.5,203.2 94.4,205.0 92.2,210.8 93.0,211.9 91.0,211.9 91.5,213.6 94.8,214.5 96.6,217.1 97.7,216.9 99.6,213.5 101.9,213.2 103.4,216.0 108.7,220.6 104.9,223.7 101.6,223.0 97.3,224.6 93.2,232.0 91.7,231.3 95.0,224.6 100.2,220.3 98.5,221.3 95.8,219.8 92.8,221.3 89.4,221.2 80.9,218.2 75.6,219.7 74.3,221.5 73.8,225.2 74.8,229.0 77.5,230.3 74.8,229.7 72.9,230.6 70.3,228.6 65.6,228.4 65.1,229.8 64.8,229.0 65.2,232.2 70.2,234.0 73.2,241.5 74.6,242.2 74.5,248.2 78.0,247.7 80.4,252.4 83.0,251.8 84.0,253.0 85.7,252.3 88.1,253.7 87.8,255.8 86.4,253.7 87.6,256.1 85.3,261.5 85.4,266.5 90.4,261.8 101.9,258.4 108.5,264.3 113.2,272.9 118.5,272.3 118.5,223.7 143.0,215.9 143.9,212.4 149.1,210.4 148.7,212.0 145.8,213.2 145.6,215.4 144.1,217.0 151.7,221.9 152.8,217.9 150.2,215.3 153.8,217.7 154.5,223.2 166.0,232.2 166.3,233.9 174.4,243.5 186.9,241.5 197.9,242.6 202.3,240.7 204.0,243.6 207.5,246.3 210.1,252.0 212.5,251.0 211.6,264.2 216.5,265.0 218.2,274.7 229.9,274.6 230.1,276.3 231.4,276.1 230.0,278.8 234.8,282.3 236.4,281.9 235.0,276.5 237.1,277.0 237.0,275.9 239.8,273.6 239.7,271.9 243.8,270.5 243.6,269.2 249.3,266.3 252.3,262.5 253.3,261.9 254.8,263.2 255.8,260.8 257.4,260.2 256.9,259.1 257.9,256.8 259.0,257.0 258.2,255.6 259.6,255.6 260.7,253.1 266.2,252.4 281.3,257.9 281.8,249.9 285.2,248.5 285.8,247.2 288.0,247.6 288.0,246.6 293.0,250.3 302.0,252.8 303.0,250.9 307.9,252.0 313.7,250.3 323.0,252.1 327.9,251.5 332.9,253.3 334.5,252.7 334.5,254.5 337.3,257.3 341.6,257.6 343.5,260.6 344.5,260.3 344.5,256.5 343.4,255.0 344.3,252.4 347.5,251.6 345.4,249.9 349.4,247.8 345.6,235.4 345.7,228.9 343.4,225.8 341.9,226.5 340.8,224.9 342.7,223.1 350.2,222.0 358.0,218.7 359.8,220.7 365.7,221.0 365.6,218.1 362.9,215.5 370.1,194.3 378.3,197.6 386.0,197.1 387.9,199.1 390.5,196.5 393.6,196.6 395.0,192.2 393.3,183.7 395.1,179.2 403.2,176.9 405.4,173.0 404.7,170.6 406.1,169.0 409.7,169.2 410.0,167.7 407.3,167.4 405.5,163.6 403.5,163.2 405.0,161.6 404.2,160.1 399.6,164.6 393.9,162.7 390.8,163.0 388.3,158.8 388.8,156.9 385.0,154.8 382.5,154.8 381.5,153.7 381.5,150.7 378.9,147.0 373.9,144.2 371.0,144.2 369.6,145.9 367.3,145.3 365.8,147.7 362.1,147.9 358.4,146.7 355.4,147.6 355.1,144.6 351.8,145.0 352.6,141.5 348.2,140.1 347.8,141.6 346.1,141.6 346.4,144.7 343.7,145.6 343.6,146.6 342.5,146.3 342.6,147.8 333.6,131.1 322.4,114.0 309.4,104.2 308.8,102.4 311.7,102.5 312.8,100.6 311.9,99.6 313.3,98.6 310.7,100.2 307.1,99.9 306.5,101.2 298.9,103.7 299.5,105.0 295.8,107.4 293.4,107.0 292.0,109.0 290.3,108.7 289.7,111.8 288.3,110.1 286.5,110.4 286.7,109.5 285.1,109.3 284.4,110.2 283.0,109.8 280.8,112.1 279.0,110.4 279.1,109.0 281.0,106.3 283.2,106.5 283.9,103.9 282.6,103.7 281.6,105.4 279.5,105.4 277.4,104.8 276.7,103.3 273.1,102.8 272.4,104.1 273.7,104.0 274.0,105.2 271.4,105.8 271.0,103.2 272.2,102.8 270.2,102.2 269.2,99.9 267.6,99.8 269.5,102.3 269.1,103.0 265.2,101.3 264.9,103.3 260.9,102.2 259.8,103.4 258.1,100.2 260.0,100.6 259.7,97.2 260.9,95.8 258.5,94.4 258.4,90.3 256.4,87.6 253.1,87.6 250.7,89.5Z' },
+  { id: 'tkm', name: 'Turkmenistan', x: 148.4, y: 300.7, lx: 140, ly: 322,
+    d: 'M144.5,255.3 142.8,253.8 142.1,255.3 138.6,255.5 140.7,257.1 141.8,259.9 140.3,257.9 137.7,257.4 136.1,260.9 130.2,262.4 127.6,265.2 129.0,271.9 127.8,273.1 117.6,271.8 113.9,273.0 111.1,270.1 108.6,264.9 101.1,259.4 90.5,262.1 85.1,266.9 86.4,267.8 86.1,270.2 88.6,272.5 89.9,277.1 87.8,283.1 87.9,289.2 91.8,293.8 89.8,289.9 94.6,290.6 94.7,294.8 93.2,295.3 93.2,293.4 91.2,297.2 92.3,299.8 92.9,297.8 94.8,298.6 97.2,302.6 99.0,303.6 98.1,308.5 98.6,324.3 102.6,325.0 106.6,323.3 107.6,319.3 113.6,314.6 121.2,315.0 122.1,312.8 125.4,312.2 128.1,313.3 129.8,312.0 131.6,316.6 138.3,318.7 139.5,320.5 145.6,320.3 149.6,322.2 150.0,325.2 156.4,329.4 158.9,334.3 166.6,334.5 167.3,348.2 168.4,348.1 171.2,351.0 174.7,350.7 177.4,354.9 178.9,353.0 180.9,353.9 184.6,350.8 184.7,348.4 185.8,347.5 184.8,345.1 186.9,345.2 193.2,342.4 197.9,339.2 200.9,327.2 203.3,326.0 207.5,326.1 209.6,322.0 214.0,324.7 216.1,324.8 217.7,315.9 211.5,312.2 207.6,312.1 196.2,302.6 194.7,303.1 191.4,300.7 178.6,289.0 177.7,283.9 176.1,282.6 172.7,274.0 169.4,272.2 167.9,274.2 162.9,273.0 160.5,273.6 157.2,271.6 156.5,270.5 157.6,268.7 156.5,266.7 158.4,266.1 156.4,263.5 156.0,260.8 154.1,259.7 150.2,259.8 148.7,257.5 146.2,257.0Z' },
+  { id: 'kgz', name: 'Kyrgyzstan', x: 290.9, y: 270.6, lx: 305, ly: 250,
+    d: 'M242.0,292.4 242.9,296.2 246.0,295.1 251.6,296.1 253.8,294.8 256.2,297.9 258.6,297.7 259.1,296.4 262.8,295.0 263.4,297.1 265.4,297.2 265.5,299.4 267.8,298.2 269.7,300.8 272.0,298.0 278.6,298.4 281.2,296.8 284.5,296.8 285.6,295.1 284.5,292.7 285.5,289.4 289.5,288.5 292.5,285.2 294.4,285.4 293.9,282.9 297.4,284.0 301.0,281.1 301.9,286.1 307.2,284.0 307.8,285.4 309.7,283.7 312.8,276.3 321.1,276.4 321.7,274.6 324.4,273.6 324.7,271.6 329.3,270.4 335.6,265.9 339.8,264.8 340.8,262.9 343.9,262.8 343.2,259.6 341.6,257.6 337.3,257.3 334.5,254.5 334.5,252.7 332.9,253.3 327.9,251.5 323.0,252.1 313.7,250.3 307.9,252.0 303.0,250.9 302.0,252.8 293.0,250.3 288.0,246.6 288.0,247.6 285.8,247.2 285.2,248.5 281.8,249.9 281.3,257.9 266.2,252.4 260.7,253.1 259.6,255.6 258.2,255.6 259.0,257.0 257.9,256.8 256.9,259.1 259.4,259.7 260.5,261.2 258.1,263.0 256.9,262.7 256.6,264.4 255.0,264.6 250.4,269.8 253.4,271.3 255.5,270.5 256.1,274.0 256.8,273.3 257.8,274.4 260.3,274.1 261.9,275.2 262.3,272.8 264.1,272.0 264.9,269.4 264.7,271.0 266.7,272.7 266.4,274.4 269.0,274.4 269.2,276.7 270.7,275.8 272.9,278.4 276.2,279.3 277.5,278.6 278.0,279.5 275.4,280.4 273.5,283.1 270.7,281.9 271.4,284.5 269.1,283.3 267.1,285.6 267.9,286.2 266.0,286.5 264.9,287.9 264.5,286.3 263.9,287.1 259.3,285.4 253.5,290.8 254.0,289.3 248.8,286.7 244.5,288.3 244.5,290.8 242.8,289.6Z M258.1,287.4 259.2,289.6 260.1,289.3 259.7,291.3 258.6,291.2 259.2,289.7Z M253.7,291.5 255.7,291.6 254.6,292.8Z' },
+  { id: 'tjk', name: 'Tajikistan', x: 258.1, y: 309.3, lx: 266, ly: 330,
+    d: 'M254.5,291.5 253.7,291.5 254.6,292.8 255.7,291.6Z M253.0,276.1 252.3,278.0 246.2,281.5 243.1,279.4 242.7,282.2 241.5,282.6 242.3,287.4 239.8,286.8 235.2,287.9 236.1,288.8 239.7,287.9 238.1,289.2 238.5,291.6 237.9,290.0 237.4,292.1 236.1,291.8 235.3,295.9 227.5,294.3 224.6,296.1 225.4,298.1 224.0,299.9 227.2,301.1 227.4,303.1 230.9,302.7 232.0,303.9 230.9,305.5 230.8,311.1 234.0,313.7 232.8,317.5 231.4,317.2 228.9,321.1 228.3,328.4 230.6,330.5 236.5,325.9 238.8,325.9 238.5,325.0 242.5,328.0 243.9,326.2 242.9,324.2 244.3,321.8 247.9,321.4 250.4,322.5 251.6,320.3 250.4,317.2 253.5,314.7 255.1,310.9 258.0,309.8 261.6,312.9 260.5,317.3 263.6,317.3 262.1,328.6 264.4,333.9 266.0,333.8 270.5,329.8 273.6,329.3 275.0,326.5 279.6,323.4 284.0,323.7 284.0,325.0 282.5,325.9 283.8,326.6 289.4,323.9 292.5,324.2 294.4,326.4 296.5,325.4 296.5,323.4 294.7,322.0 295.5,319.3 293.5,313.7 292.5,313.3 292.5,310.7 287.8,307.8 286.0,309.4 284.2,308.2 283.2,305.0 284.6,303.1 281.8,299.4 282.3,296.9 278.6,298.4 272.0,298.0 269.7,300.8 267.8,298.2 265.5,299.4 265.4,297.2 263.4,297.1 262.8,295.0 257.1,298.0 253.8,294.8 251.6,296.1 246.0,295.1 242.8,296.1 242.3,290.9 242.8,289.6 244.5,290.7 244.5,288.3 249.0,286.8 254.0,289.3 253.5,290.8 255.0,290.0 255.1,288.5 258.0,286.9 254.7,287.5 254.0,285.2 252.1,284.4 256.2,280.3Z' },
 ]
-const uz = { name: 'Uzbekistan', x: 190, y: 232 }
+const uz = { name: 'Uzbekistan', x: 185.1, y: 266.7, lx: 158, ly: 287,
+  d: 'M265.6,289.8 265.1,290.7 266.0,290.6Z M258.2,287.4 259.2,289.7 258.6,291.2 259.7,291.3 260.1,289.3 259.2,289.6Z M139.8,228.0 139.2,225.3 142.6,215.9 118.5,223.7 118.5,272.3 128.2,273.1 129.3,271.6 128.2,270.9 127.5,266.0 129.8,259.4 131.4,258.7 133.8,261.4 135.8,261.1 136.3,257.4 137.8,256.7 140.1,257.5 140.8,259.6 142.0,259.8 138.6,255.2 139.7,254.3 142.5,254.7 142.9,252.8 146.6,256.4 148.2,256.5 150.5,259.5 154.2,259.4 155.9,260.6 155.4,264.1 158.8,266.4 156.3,266.5 157.4,268.8 156.5,270.9 157.9,272.2 160.3,273.7 165.4,273.1 167.3,274.7 169.5,272.8 173.2,275.1 175.5,282.2 177.6,284.0 178.9,290.5 193.1,302.4 196.3,303.4 207.3,312.5 210.8,312.7 215.3,315.9 217.4,316.1 218.0,317.2 216.7,319.1 216.4,324.5 217.4,325.2 220.4,324.3 223.3,327.1 225.6,326.0 228.2,327.2 228.9,321.1 231.4,317.2 232.8,317.5 234.0,313.7 230.8,311.1 230.9,305.5 232.0,303.9 230.9,302.7 227.4,303.1 227.2,301.1 224.0,299.9 225.4,298.1 224.6,296.1 227.5,294.3 235.3,295.9 236.1,291.8 237.4,292.1 237.9,290.0 238.5,291.6 238.1,289.2 239.7,287.9 236.1,288.8 235.2,287.9 239.8,286.8 242.3,287.4 241.5,282.6 242.7,282.2 243.1,279.4 246.2,281.5 252.3,278.0 253.2,276.1 256.2,280.1 251.9,283.8 254.2,285.4 254.7,287.5 260.7,285.3 263.4,287.0 264.5,286.3 264.9,287.9 267.9,286.2 267.1,285.6 269.1,283.3 271.4,284.5 270.7,281.9 273.5,283.1 275.4,280.4 278.0,279.5 277.5,278.6 276.2,279.3 272.9,278.4 270.7,275.8 269.2,276.7 269.0,274.4 266.4,274.4 266.7,272.7 264.7,271.0 264.9,269.4 264.1,272.0 262.3,272.8 261.9,275.2 260.4,274.1 257.8,274.4 256.8,273.3 256.1,274.0 255.5,270.5 253.4,271.3 250.4,269.8 255.0,264.6 256.6,264.4 256.9,262.7 258.1,263.0 260.5,261.2 258.5,259.5 255.8,260.8 254.7,263.2 253.3,261.9 252.3,262.5 249.3,266.3 243.6,269.2 243.8,270.5 239.8,271.8 239.8,273.6 237.0,275.9 237.2,276.9 236.2,277.4 235.8,276.2 234.5,277.1 235.6,277.6 236.4,281.9 234.8,282.3 230.0,278.8 231.4,276.1 230.1,276.3 229.9,274.6 218.2,274.7 216.5,265.0 211.6,264.2 212.5,251.0 210.1,252.0 207.5,246.3 204.0,243.6 202.3,240.7 197.9,242.6 186.9,241.5 174.4,243.5 166.3,233.9 166.0,232.2 155.7,223.7 154.5,223.2 152.8,225.5 151.7,225.2 151.7,221.9 144.1,217.0 142.6,229.4 139.6,231.4Z' }
 
-// floating ambient particles (fixed for stability)
+// floating ambient particles
 const particles = [
-  { x: 90, y: 120, r: 1.6, d: 0 }, { x: 350, y: 110, r: 2.2, d: 1.2 },
-  { x: 300, y: 70, r: 1.4, d: 0.6 }, { x: 130, y: 350, r: 2, d: 1.8 },
-  { x: 380, y: 280, r: 1.5, d: 0.9 }, { x: 60, y: 240, r: 2.1, d: 2.4 },
-  { x: 220, y: 40, r: 1.6, d: 1.5 }, { x: 400, y: 200, r: 1.3, d: 0.3 },
-  { x: 70, y: 320, r: 1.7, d: 2.1 }, { x: 340, y: 350, r: 1.9, d: 1.1 },
-  { x: 160, y: 80, r: 1.4, d: 2.7 }, { x: 250, y: 390, r: 1.6, d: 0.5 },
+  { x: 70, y: 130, r: 1.6, d: 0 }, { x: 380, y: 120, r: 2.0, d: 1.2 },
+  { x: 330, y: 70, r: 1.4, d: 0.6 }, { x: 110, y: 360, r: 1.8, d: 1.8 },
+  { x: 400, y: 300, r: 1.5, d: 0.9 }, { x: 50, y: 250, r: 2.0, d: 2.4 },
+  { x: 240, y: 40, r: 1.6, d: 1.5 }, { x: 415, y: 210, r: 1.3, d: 0.3 },
+  { x: 60, y: 330, r: 1.7, d: 2.1 }, { x: 350, y: 370, r: 1.8, d: 1.1 },
+  { x: 170, y: 60, r: 1.4, d: 2.7 }, { x: 285, y: 400, r: 1.6, d: 0.5 },
 ]
-
 const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
-
-// --- Dotted Central Asia landmass behind the globe -------------------------
-// Rough outline of the region (Kazakhstan north, the -stans below, Caspian
-// indent on the west) in the 440×440 viewBox, kept inside the globe circle.
-const region = [
-  [72, 152], [96, 110], [140, 84], [200, 74], [262, 78], [316, 92], [356, 122],
-  [360, 162], [342, 196], [330, 216],
-  [316, 252], [292, 300], [262, 326],
-  [216, 332], [160, 330], [120, 306],
-  [100, 266], [122, 236], [96, 206], [80, 176],
-]
-
-function inPoly(x, y, poly) {
-  let inside = false
-  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-    const [xi, yi] = poly[i], [xj, yj] = poly[j]
-    const hit = (yi > y) !== (yj > y) &&
-      x < ((xj - xi) * (y - yi)) / (yj - yi) + xi
-    if (hit) inside = !inside
-  }
-  return inside
-}
-
-// Generate a dense, slightly offset dot grid clipped to the region polygon
-// and to the globe circle (centre 220,220 r170).
-const mapDots = (() => {
-  const dots = []
-  const step = 9
-  for (let row = 0, y = 80; y <= 334; y += step, row++) {
-    const offset = row % 2 ? step / 2 : 0
-    for (let x = 70 + offset; x <= 362; x += step) {
-      const dx = x - 220, dy = y - 220
-      if (dx * dx + dy * dy > 166 * 166) continue        // inside the globe
-      if (!inPoly(x, y, region)) continue                 // inside Central Asia
-      dots.push({ x, y, r: 1.5 })
-    }
-  }
-  return dots
-})()
 </script>
 
 <template>
   <svg viewBox="0 0 440 440" class="ca-map" role="img"
-    aria-label="AI network across Central Asia">
+    aria-label="AI network across Central Asia, centred on Uzbekistan">
     <defs>
       <radialGradient id="caGlow" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#2f8fff" stop-opacity="0.4" />
+        <stop offset="0%" stop-color="#2f8fff" stop-opacity="0.35" />
         <stop offset="100%" stop-color="#2f8fff" stop-opacity="0" />
       </radialGradient>
       <linearGradient id="caLine" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0%" stop-color="#6db8ff" />
         <stop offset="100%" stop-color="#2f8fff" />
       </linearGradient>
-      <linearGradient id="caScan" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="#6db8ff" stop-opacity="0" />
-        <stop offset="100%" stop-color="#6db8ff" stop-opacity="0.28" />
+      <linearGradient id="uzFill" x1="0" y1="0" x2="0.6" y2="1">
+        <stop offset="0%" stop-color="#3f9bff" />
+        <stop offset="100%" stop-color="#1b6fd6" />
       </linearGradient>
-      <clipPath id="caClip"><circle cx="220" cy="220" r="170" /></clipPath>
+      <filter id="uzGlow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="4" result="b" />
+        <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
     </defs>
 
     <!-- ambient glow -->
-    <circle cx="220" cy="220" r="210" fill="url(#caGlow)" class="breathe" />
+    <circle cx="220" cy="230" r="200" fill="url(#caGlow)" class="breathe" />
 
-    <!-- dotted Central Asia map sitting behind the globe network -->
-    <g clip-path="url(#caClip)" class="ca-basemap">
-      <circle v-for="(d, i) in mapDots" :key="'md' + i"
-        :cx="d.x" :cy="d.y" :r="d.r" fill="#5aa6ff" />
-    </g>
-
-    <!-- rotating AI orbit rings -->
+    <!-- faint AI orbit rings rotating behind the map -->
     <g class="orbit orbit-a">
-      <ellipse cx="220" cy="220" rx="206" ry="80" fill="none"
-        stroke="rgba(109, 184, 255,0.18)" stroke-width="1" />
+      <ellipse cx="220" cy="230" rx="210" ry="84" fill="none"
+        stroke="rgba(109, 184, 255,0.16)" stroke-width="1" />
     </g>
     <g class="orbit orbit-b">
-      <ellipse cx="220" cy="220" rx="200" ry="74" fill="none"
-        stroke="rgba(47, 143, 255,0.16)" stroke-width="1" />
+      <ellipse cx="220" cy="230" rx="118" ry="206" fill="none"
+        stroke="rgba(47, 143, 255,0.13)" stroke-width="1" />
     </g>
-
-    <!-- globe + rotating scan sweep -->
-    <g clip-path="url(#caClip)">
-      <g class="scan">
-        <path d="M220,220 L220,46 A174,174 0 0,1 392,168 Z" fill="url(#caScan)" />
-      </g>
+    <g class="orbit orbit-c">
+      <ellipse cx="220" cy="230" rx="200" ry="200" fill="none"
+        stroke="rgba(109, 184, 255,0.10)" stroke-width="1" />
     </g>
-    <circle cx="220" cy="220" r="170" fill="none" stroke="rgba(109, 184, 255,0.22)" stroke-width="1.2" />
-    <ellipse cx="220" cy="220" rx="170" ry="64" fill="none" stroke="rgba(109, 184, 255,0.14)" stroke-width="1" />
-    <ellipse cx="220" cy="220" rx="64" ry="170" fill="none" stroke="rgba(109, 184, 255,0.14)" stroke-width="1" />
-    <line x1="50" y1="220" x2="390" y2="220" stroke="rgba(109, 184, 255,0.14)" stroke-width="1" />
 
     <!-- particles -->
     <g class="particles">
@@ -117,35 +71,42 @@ const mapDots = (() => {
         fill="#6db8ff" :style="{ animationDelay: p.d + 's' }" />
     </g>
 
+    <!-- neighbour countries (lighter fill) -->
+    <g class="lands">
+      <path v-for="c in neighbors" :key="c.id" :d="c.d" class="land" />
+    </g>
+
     <!-- connections (data flow) -->
     <g class="links">
-      <line v-for="c in countries" :key="'l-' + c.id"
+      <line v-for="c in neighbors" :key="'l-' + c.id"
         :x1="uz.x" :y1="uz.y" :x2="c.x" :y2="c.y"
-        stroke="url(#caLine)" stroke-width="1.6" stroke-opacity="0.55"
+        stroke="url(#caLine)" stroke-width="1.4" stroke-opacity="0.5"
         stroke-dasharray="3 6" />
     </g>
 
+    <!-- Uzbekistan (highlighted hub) -->
+    <path :d="uz.d" class="land-uz" filter="url(#uzGlow)" />
+
     <!-- traveling AI data packets -->
-    <circle v-for="(c, i) in countries" :key="'pk-' + c.id" r="3.2" fill="#d6e9ff"
+    <circle v-for="(c, i) in neighbors" :key="'pk-' + c.id" r="3" fill="#d6e9ff"
       class="packet" :style="{ offsetPath: pathFor(c), animationDelay: i * 0.55 + 's' }" />
 
-    <!-- neighbour nodes (re-materialise on a loop) -->
-    <g v-for="(c, i) in countries" :key="c.id" class="node"
+    <!-- neighbour nodes -->
+    <g v-for="(c, i) in neighbors" :key="c.id" class="node"
       :style="{ animationDelay: 0.4 + i * 0.5 + 's' }">
-      <circle :cx="c.x" :cy="c.y" r="13" class="ping" fill="none"
-        stroke="#6db8ff" stroke-width="1.2" :style="{ animationDelay: i * 0.5 + 's' }" />
-      <circle :cx="c.x" :cy="c.y" r="11" fill="rgba(47, 143, 255,0.16)" />
-      <circle :cx="c.x" :cy="c.y" r="5" fill="#6db8ff" />
-      <text :x="c.x" :y="c.y - 18" class="lbl">{{ c.name }}</text>
+      <circle :cx="c.x" :cy="c.y" r="11" class="ping" fill="none"
+        stroke="#6db8ff" stroke-width="1.1" :style="{ animationDelay: i * 0.5 + 's' }" />
+      <circle :cx="c.x" :cy="c.y" r="4" fill="#6db8ff" />
+      <text :x="c.lx" :y="c.ly" class="lbl">{{ c.name.toUpperCase() }}</text>
     </g>
 
-    <!-- Uzbekistan (hub) -->
+    <!-- Uzbekistan hub marker + label -->
     <g class="hub">
-      <circle :cx="uz.x" :cy="uz.y" r="14" class="pulse" fill="none"
-        stroke="#6db8ff" stroke-width="1.5" />
-      <circle :cx="uz.x" :cy="uz.y" r="20" fill="rgba(47, 143, 255,0.2)" />
-      <circle :cx="uz.x" :cy="uz.y" r="9" fill="#2f8fff" stroke="#d6e9ff" stroke-width="2" />
-      <text :x="uz.x" :y="uz.y + 38" class="lbl hub-lbl">{{ uz.name }}</text>
+      <circle :cx="uz.x + 30" :cy="uz.y + 16" r="12" class="pulse" fill="none"
+        stroke="#cfe6ff" stroke-width="1.4" />
+      <circle :cx="uz.x + 30" :cy="uz.y + 16" r="6" fill="#fff" />
+      <circle :cx="uz.x + 30" :cy="uz.y + 16" r="2.4" fill="#1b6fd6" />
+      <text :x="uz.lx" :y="uz.ly" class="lbl hub-lbl">UZBEKISTAN</text>
     </g>
   </svg>
 </template>
@@ -155,134 +116,72 @@ const mapDots = (() => {
   width: 100%;
   height: 100%;
   display: block;
-  background: transparent; /* blend into the hero background */
-}
-/* faint dotted regional map behind the network */
-.ca-basemap {
-  opacity: 0.5;
+  background: transparent;
 }
 .lbl {
-  fill: #c1ccd6;
+  fill: #c8d5e4;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-anchor: middle;
-  letter-spacing: 0.02em;
+  paint-order: stroke;
+  stroke: rgba(11, 27, 46, 0.7);
+  stroke-width: 3px;
 }
 .hub-lbl {
-  fill: #6db8ff;
-  font-size: 15px;
-  font-weight: 700;
+  fill: #eaf3ff;
+  font-size: 13px;
+}
+
+/* country fills */
+.land {
+  fill: rgba(80, 150, 235, 0.20);
+  stroke: rgba(120, 190, 255, 0.55);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  transition: fill 0.3s ease;
+}
+.lands:hover .land { fill: rgba(80, 150, 235, 0.26); }
+.land-uz {
+  fill: url(#uzFill);
+  stroke: #9fc8ff;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
 }
 
 /* breathing glow */
-.breathe {
-  animation: breathe 5s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-@keyframes breathe {
-  0%, 100% { opacity: 0.7; transform: scale(0.96); }
-  50% { opacity: 1; transform: scale(1.04); }
-}
+.breathe { animation: breathe 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes breathe { 0%,100% { opacity: 0.7; transform: scale(0.97); } 50% { opacity: 1; transform: scale(1.03); } }
 
-/* AI orbit rings rotating around the globe */
-.orbit {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-.orbit-a {
-  transform: rotate(28deg);
-  animation: spin 18s linear infinite;
-}
-.orbit-b {
-  transform: rotate(-34deg);
-  animation: spin 24s linear infinite reverse;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+/* orbit rings */
+.orbit { transform-box: fill-box; transform-origin: center; }
+.orbit-a { transform: rotate(22deg); animation: spin 26s linear infinite; }
+.orbit-b { transform: rotate(-30deg); animation: spin 32s linear infinite reverse; }
+.orbit-c { animation: spin 40s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-/* radar scan sweep */
-.scan {
-  transform-box: fill-box;
-  transform-origin: 220px 220px;
-  animation: sweep 6s linear infinite;
-}
-@keyframes sweep {
-  to { transform: rotate(360deg); }
-}
+/* particles */
+.particles circle { animation: twinkle 3.4s ease-in-out infinite; }
+@keyframes twinkle { 0%,100% { opacity: 0.12; } 50% { opacity: 0.85; } }
 
-/* twinkling particles */
-.particles circle {
-  animation: twinkle 3.4s ease-in-out infinite;
-}
-@keyframes twinkle {
-  0%, 100% { opacity: 0.15; }
-  50% { opacity: 0.9; }
-}
+/* data flow */
+.links line { animation: dash 1.3s linear infinite; }
+@keyframes dash { to { stroke-dashoffset: -18; } }
 
-/* data flow along links */
-.links line {
-  animation: dash 1.3s linear infinite;
-}
-@keyframes dash {
-  to { stroke-dashoffset: -18; }
-}
+/* packets */
+.packet { offset-rotate: 0deg; animation: travel 2.8s ease-in-out infinite; }
+@keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
 
-/* traveling data packets */
-.packet {
-  offset-rotate: 0deg;
-  animation: travel 2.8s ease-in-out infinite;
-}
-@keyframes travel {
-  0% { offset-distance: 0%; opacity: 0; }
-  12% { opacity: 1; }
-  88% { opacity: 1; }
-  100% { offset-distance: 100%; opacity: 0; }
-}
-
-/* nodes re-materialise on a loop */
-.node {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: appear 9s ease-in-out infinite;
-}
-@keyframes appear {
-  0% { opacity: 0; transform: scale(0.2); }
-  10% { opacity: 1; transform: scale(1.12); }
-  16% { transform: scale(1); }
-  90% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.2); }
-}
-
-/* node ping ring */
-.ping {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: ping 2.6s ease-out infinite;
-}
-@keyframes ping {
-  0% { transform: scale(0.6); opacity: 0.8; }
-  70%, 100% { transform: scale(2.2); opacity: 0; }
-}
+/* node ping */
+.ping { transform-box: fill-box; transform-origin: center; animation: ping 2.6s ease-out infinite; }
+@keyframes ping { 0% { transform: scale(0.6); opacity: 0.8; } 70%,100% { transform: scale(2.2); opacity: 0; } }
 
 /* hub pulse */
-.pulse {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: pulse 2.4s ease-out infinite;
-}
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 0.9; }
-  70%, 100% { transform: scale(2.4); opacity: 0; }
-}
+.pulse { transform-box: fill-box; transform-origin: center; animation: pulse 2.4s ease-out infinite; }
+@keyframes pulse { 0% { transform: scale(1); opacity: 0.9; } 70%,100% { transform: scale(2.4); opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .breathe, .orbit, .scan, .particles circle, .links line,
-  .packet, .node, .ping, .pulse {
-    animation: none;
-  }
-  .node { opacity: 1; transform: none; }
+  .breathe, .orbit, .particles circle, .links line, .packet, .ping, .pulse { animation: none; }
 }
 </style>
