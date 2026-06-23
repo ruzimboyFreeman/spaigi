@@ -1,37 +1,40 @@
 :root {
-  /* Brand palette — Samarkand navy + turquoise (AI signal + Uzbek heritage).
-     Accent vars keep their historical --gold* names but now hold turquoise. */
-  --ink: #0b1b2e;
-  --ink-2: #102438;
-  --ink-3: #163049;
+  /* Bright consultancy palette: white canvas, cobalt UI, violet/pink accents. */
+  --ink: #0b1d5f;
+  --ink-2: #08164b;
+  --ink-3: #284cbd;
   --panel: #ffffff;
-  --paper: #f4f6f7;
-  --paper-2: #e8ecef;
-  --line: #dde3e7;
-  --line-ink: rgba(255, 255, 255, 0.1);
+  --paper: #ffffff;        /* white canvas */
+  --paper-2: #f7f9ff;
+  --line: #e9eefb;
+  --line-ink: rgba(255, 255, 255, 0.16);
 
-  --text: #3a4452;
-  --text-strong: #0b1b2e;
-  --text-muted: #66707d;
-  --text-on-ink: #c1ccd6;
-  --text-on-ink-strong: #f3f7fa;
+  --text: #5d6378;
+  --text-strong: #101733;
+  --text-muted: #8a91a7;
+  --text-on-ink: #dce4ff;
+  --text-on-ink-strong: #f6f7fe;
 
-  --gold: #2f8fff;
-  --gold-soft: #6db8ff;
-  --gold-deep: #1b6fd6;
-  --gold-bg: rgba(47, 143, 255, 0.12);
+  --gold: #3d63d8;
+  --gold-soft: #6f8af7;
+  --gold-deep: #284fca;
+  --gold-bg: rgba(61, 99, 216, 0.11);
+  --violet: #7654e8;
+  --pink: #f25b9f;
+  --grad: linear-gradient(120deg, #063fb9 0%, #4458d6 43%, #8350df 72%, #f45f9c 100%);
+  --grad-soft: linear-gradient(120deg, #3262dd 0%, #7654e8 56%, #f25b9f 100%);
 
   --maxw: 1400px;
-  --radius: 14px;
-  --radius-lg: 22px;
-  --shadow-sm: 0 1px 2px rgba(10, 19, 34, 0.06), 0 4px 14px rgba(10, 19, 34, 0.05);
-  --shadow: 0 10px 30px -12px rgba(10, 19, 34, 0.25);
-  --shadow-gold: 0 18px 40px -18px rgba(27, 111, 214, 0.55);
+  --radius: 8px;
+  --radius-lg: 10px;
+  --shadow-sm: 0 8px 24px rgba(33, 58, 140, 0.08);
+  --shadow: 0 20px 52px -18px rgba(33, 58, 140, 0.28);
+  --shadow-gold: 0 14px 30px -14px rgba(61, 99, 216, 0.58);
 
   --sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
   --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
 
-  font: 17px/1.6 var(--sans);
+  font: 16px/1.65 var(--sans);
   color: var(--text);
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
@@ -55,12 +58,12 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--serif);
+  font-family: var(--sans);
   color: var(--text-strong);
-  font-weight: 600;
+  font-weight: 800;
   margin: 0;
   line-height: 1.08;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 p {
@@ -86,7 +89,7 @@ img {
 }
 
 .section {
-  padding-block: 110px;
+  padding-block: 96px;
 }
 
 @media (max-width: 860px) {
@@ -101,25 +104,22 @@ img {
   gap: 10px;
   font-family: var(--sans);
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold-deep);
 }
 
 .eyebrow::before {
-  content: '';
-  width: 26px;
-  height: 1.5px;
-  background: var(--gold);
+  display: none;
 }
 
 .eyebrow.on-ink {
-  color: var(--gold-soft);
+  color: var(--gold-deep);
 }
 
 .section-title {
-  font-size: clamp(2rem, 4vw, 3.1rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   margin-top: 18px;
   max-width: 16ch;
 }
@@ -138,9 +138,11 @@ img {
   gap: 10px;
   font-family: var(--sans);
   font-weight: 600;
-  font-size: 0.95rem;
-  padding: 14px 26px;
-  border-radius: 999px;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border-radius: 7px;
   border: 1px solid transparent;
   cursor: pointer;
   transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease,
@@ -150,13 +152,13 @@ img {
 
 .btn-primary {
   background: var(--gold);
-  color: var(--ink);
+  color: #fff;
   box-shadow: var(--shadow-gold);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  background: var(--gold-soft);
+  background: var(--gold-deep);
 }
 
 .btn-ghost {
@@ -166,8 +168,8 @@ img {
 }
 
 .btn-ghost.on-ink {
-  color: var(--text-on-ink-strong);
-  border-color: rgba(255, 255, 255, 0.22);
+  color: var(--text-strong);
+  border-color: var(--line);
 }
 
 .btn-ghost:hover {
@@ -176,8 +178,8 @@ img {
 }
 
 .btn-ghost.on-ink:hover {
-  border-color: var(--gold-soft);
-  color: var(--gold-soft);
+  border-color: var(--gold);
+  color: var(--gold-deep);
 }
 
 .btn .arrow {

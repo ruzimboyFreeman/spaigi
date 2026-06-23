@@ -66,9 +66,26 @@ const cols = [
 
 <style scoped>
 .ftr {
-  background: #060c16;
+  position: relative;
+  background: linear-gradient(120deg, #1a2470 0%, #2742d8 52%, #6d3fd1 100%);
   color: var(--text-on-ink);
-  padding: 72px 0 32px;
+  padding: 84px 0 34px;
+  overflow: hidden;
+}
+.ftr::before {
+  content: '';
+  position: absolute;
+  top: -160px;
+  right: -120px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.45), transparent 65%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.ftr .container {
+  position: relative;
 }
 .top {
   display: grid;
@@ -81,7 +98,7 @@ const cols = [
   display: flex;
   align-items: center;
   gap: 12px;
-  color: var(--gold-soft);
+  color: #fff;
   margin-bottom: 18px;
 }
 .brand-logo {
@@ -112,7 +129,7 @@ const cols = [
   font-size: 0.76rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold-soft);
+  color: #d6dcff;
 }
 .col ul {
   list-style: none;
@@ -127,7 +144,7 @@ const cols = [
   transition: color 0.18s ease;
 }
 .col a:hover {
-  color: var(--gold-soft);
+  color: #fff;
 }
 .bottom {
   display: flex;
@@ -136,12 +153,12 @@ const cols = [
   gap: 12px;
   padding-top: 26px;
   font-size: 0.82rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.62);
 }
 .motto {
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gold-deep);
+  color: rgba(255, 255, 255, 0.82);
 }
 @media (max-width: 860px) {
   .top {

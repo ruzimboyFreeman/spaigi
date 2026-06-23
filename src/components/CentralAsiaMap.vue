@@ -31,16 +31,16 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
     aria-label="AI network across Central Asia, centred on Uzbekistan">
     <defs>
       <radialGradient id="caGlow" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#2f8fff" stop-opacity="0.35" />
-        <stop offset="100%" stop-color="#2f8fff" stop-opacity="0" />
+        <stop offset="0%" stop-color="#3b5bff" stop-opacity="0.35" />
+        <stop offset="100%" stop-color="#3b5bff" stop-opacity="0" />
       </radialGradient>
       <linearGradient id="caLine" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#6db8ff" />
-        <stop offset="100%" stop-color="#2f8fff" />
+        <stop offset="0%" stop-color="#6f86ff" />
+        <stop offset="100%" stop-color="#3b5bff" />
       </linearGradient>
       <linearGradient id="uzFill" x1="0" y1="0" x2="0.6" y2="1">
-        <stop offset="0%" stop-color="#3f9bff" />
-        <stop offset="100%" stop-color="#1b6fd6" />
+        <stop offset="0%" stop-color="#7280cf" />
+        <stop offset="100%" stop-color="#2742d8" />
       </linearGradient>
       <filter id="uzGlow" x="-30%" y="-30%" width="160%" height="160%">
         <feGaussianBlur stdDeviation="4" result="b" />
@@ -54,21 +54,21 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
     <!-- faint AI orbit rings rotating behind the map -->
     <g class="orbit orbit-a">
       <ellipse cx="220" cy="230" rx="210" ry="84" fill="none"
-        stroke="rgba(109, 184, 255,0.16)" stroke-width="1" />
+        stroke="rgba(125, 146, 255,0.16)" stroke-width="1" />
     </g>
     <g class="orbit orbit-b">
       <ellipse cx="220" cy="230" rx="118" ry="206" fill="none"
-        stroke="rgba(47, 143, 255,0.13)" stroke-width="1" />
+        stroke="rgba(59, 91, 255,0.13)" stroke-width="1" />
     </g>
     <g class="orbit orbit-c">
       <ellipse cx="220" cy="230" rx="200" ry="200" fill="none"
-        stroke="rgba(109, 184, 255,0.10)" stroke-width="1" />
+        stroke="rgba(125, 146, 255,0.10)" stroke-width="1" />
     </g>
 
     <!-- particles -->
     <g class="particles">
       <circle v-for="(p, i) in particles" :key="'p' + i" :cx="p.x" :cy="p.y" :r="p.r"
-        fill="#6db8ff" :style="{ animationDelay: p.d + 's' }" />
+        fill="#6f86ff" :style="{ animationDelay: p.d + 's' }" />
     </g>
 
     <!-- neighbour countries (lighter fill) -->
@@ -88,24 +88,24 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
     <path :d="uz.d" class="land-uz" filter="url(#uzGlow)" />
 
     <!-- traveling AI data packets -->
-    <circle v-for="(c, i) in neighbors" :key="'pk-' + c.id" r="3" fill="#d6e9ff"
+    <circle v-for="(c, i) in neighbors" :key="'pk-' + c.id" r="3" fill="#eef0fb"
       class="packet" :style="{ offsetPath: pathFor(c), animationDelay: i * 0.55 + 's' }" />
 
     <!-- neighbour nodes -->
     <g v-for="(c, i) in neighbors" :key="c.id" class="node"
       :style="{ animationDelay: 0.4 + i * 0.5 + 's' }">
       <circle :cx="c.x" :cy="c.y" r="11" class="ping" fill="none"
-        stroke="#6db8ff" stroke-width="1.1" :style="{ animationDelay: i * 0.5 + 's' }" />
-      <circle :cx="c.x" :cy="c.y" r="4" fill="#6db8ff" />
+        stroke="#6f86ff" stroke-width="1.1" :style="{ animationDelay: i * 0.5 + 's' }" />
+      <circle :cx="c.x" :cy="c.y" r="4" fill="#6f86ff" />
       <text :x="c.lx" :y="c.ly" class="lbl">{{ c.name.toUpperCase() }}</text>
     </g>
 
     <!-- Uzbekistan hub marker + label -->
     <g class="hub">
       <circle :cx="uz.x + 30" :cy="uz.y + 16" r="12" class="pulse" fill="none"
-        stroke="#cfe6ff" stroke-width="1.4" />
-      <circle :cx="uz.x + 30" :cy="uz.y + 16" r="6" fill="#fff" />
-      <circle :cx="uz.x + 30" :cy="uz.y + 16" r="2.4" fill="#1b6fd6" />
+        stroke="#2742d8" stroke-width="1.4" />
+      <circle :cx="uz.x + 30" :cy="uz.y + 16" r="6" fill="#3b5bff" />
+      <circle :cx="uz.x + 30" :cy="uz.y + 16" r="2.4" fill="#fff" />
       <text :x="uz.lx" :y="uz.ly" class="lbl hub-lbl">UZBEKISTAN</text>
     </g>
   </svg>
@@ -119,33 +119,33 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
   background: transparent;
 }
 .lbl {
-  fill: #c8d5e4;
+  fill: #1f2547;
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-anchor: middle;
   paint-order: stroke;
-  stroke: rgba(11, 27, 46, 0.7);
+  stroke: rgba(255, 255, 255, 0.85);
   stroke-width: 3px;
 }
 .hub-lbl {
-  fill: #eaf3ff;
+  fill: #1e2a78;
   font-size: 13px;
 }
 
 /* country fills */
 .land {
-  fill: rgba(80, 150, 235, 0.20);
-  stroke: rgba(120, 190, 255, 0.55);
+  fill: rgba(123, 135, 210, 0.22);
+  stroke: rgba(59, 91, 255, 0.55);
   stroke-width: 1;
   stroke-linejoin: round;
   transition: fill 0.3s ease;
 }
-.lands:hover .land { fill: rgba(80, 150, 235, 0.26); }
+.lands:hover .land { fill: rgba(123, 135, 210, 0.34); }
 .land-uz {
   fill: url(#uzFill);
-  stroke: #9fc8ff;
+  stroke: #7d92ff;
   stroke-width: 1.2;
   stroke-linejoin: round;
 }

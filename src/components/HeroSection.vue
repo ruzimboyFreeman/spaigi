@@ -1,45 +1,39 @@
 <script setup>
 import BrandMark from './BrandMark.vue'
-import CentralAsiaMap from './CentralAsiaMap.vue'
 </script>
 
 <template>
   <section id="top" class="hero">
-    <div class="grid-bg" aria-hidden="true"></div>
-    <div class="glow" aria-hidden="true"></div>
+    <div class="hero-dots hero-dots-a" aria-hidden="true"></div>
+    <div class="hero-dots hero-dots-b" aria-hidden="true"></div>
 
     <div class="container hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow on-ink" v-reveal>Tashkent · Uzbekistan · Central Asia</p>
+        <p class="eyebrow" v-reveal>Growth Your Business</p>
 
         <h1 class="hero-title" v-reveal="80">
-          Towards strategic policy.<br />
-          <span class="accent">Governing</span> artificial intelligence.
+          Strategic Policy<br />
+          <span class="grad-text">AI Governance</span>
         </h1>
 
         <p class="hero-sub" v-reveal="160">
-          SPAIGI is an independent, research- and practice-oriented policy think tank with
-          government engagement, headquartered in Tashkent — analyzing international and
-          regional policy and the opportunities and risks of artificial intelligence to
-          secure a sustainable future.
+          We provide end-to-end policy research, AI governance analysis, and strategic
+          foresight that help institutions make evidence-based decisions.
         </p>
 
         <div class="hero-cta" v-reveal="240">
           <a href="#research" class="btn btn-primary">
-            Explore our research
+            Get Started
             <span class="arrow">→</span>
           </a>
-          <a href="#about" class="btn btn-ghost on-ink">About the institute</a>
         </div>
       </div>
 
       <div class="hero-visual" v-reveal="200">
-        <div class="visual-frame">
-          <CentralAsiaMap />
-        </div>
-        <div class="visual-badge">
-          <img src="/img/logo-mark.png" alt="SPAIGI logo" />
-          <span>Central Asia-focused think tank</span>
+        <div class="shape shape-blue" aria-hidden="true"></div>
+        <div class="shape shape-light" aria-hidden="true"></div>
+        <div class="photo-frame">
+          <img src="/img/hero-bg.jpg" alt="SPAIGI experts at the Global Forum on AI in Government" />
         </div>
       </div>
     </div>
@@ -56,112 +50,129 @@ import CentralAsiaMap from './CentralAsiaMap.vue'
 <style scoped>
 .hero {
   position: relative;
-  background: radial-gradient(120% 120% at 80% 0%, var(--ink-3) 0%, var(--ink) 55%);
-  color: var(--text-on-ink);
-  padding: 170px 0 110px;
+  background: var(--paper);
+  color: var(--text);
+  padding: 128px 0 76px;
   overflow: hidden;
   isolation: isolate;
 }
-.grid-bg {
+.hero-dots {
   position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(120% 90% at 50% 10%, #000 30%, transparent 80%);
   z-index: -1;
+  background: url('/bg/world-dots.svg') no-repeat center / contain;
+  opacity: 0.12;
+  pointer-events: none;
 }
-.glow {
-  position: absolute;
-  top: -180px;
-  right: -120px;
-  width: 540px;
-  height: 540px;
-  background: radial-gradient(circle, rgba(47, 143, 255, 0.32), transparent 65%);
-  filter: blur(20px);
-  z-index: -1;
+.hero-dots-a {
+  width: 560px;
+  height: 420px;
+  left: -120px;
+  top: 180px;
+  transform: rotate(-20deg);
+}
+.hero-dots-b {
+  width: 520px;
+  height: 360px;
+  right: 260px;
+  top: 42px;
+  transform: rotate(18deg);
 }
 .hero-inner {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1.12fr;
-  gap: 80px;
+  grid-template-columns: minmax(360px, 0.78fr) minmax(520px, 1.1fr);
+  gap: 52px;
   align-items: center;
 }
-.hero-visual {
-  position: relative;
-}
-.visual-frame {
-  aspect-ratio: 1 / 1;
-}
-.visual-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.visual-badge {
-  position: absolute;
-  left: -18px;
-  bottom: -18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(10, 19, 34, 0.55);
-  backdrop-filter: blur(8px);
-  border-radius: 999px;
-  padding: 8px 18px 8px 8px;
-}
-.visual-badge img {
-  height: 30px;
-  width: auto;
-  background: #fff;
-  padding: 3px 7px;
-  border-radius: 8px;
-}
-.visual-badge span {
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--gold-soft);
-}
-.motto-wrap {
-  position: relative;
-}
+
+/* ---- copy ---- */
 .hero-title {
-  font-size: clamp(2.6rem, 6.2vw, 5rem);
-  color: var(--text-on-ink-strong);
-  margin-top: 22px;
-  letter-spacing: -0.02em;
-  line-height: 1.04;
+  font-size: clamp(3.2rem, 6vw, 5.7rem);
+  color: var(--text-strong);
+  margin-top: 14px;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
 }
-.accent {
-  color: var(--gold-soft);
-  font-style: italic;
+.grad-text {
+  background: var(--grad-soft);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .hero-sub {
   margin-top: 28px;
-  font-size: clamp(1.05rem, 1.7vw, 1.28rem);
-  max-width: 62ch;
-  color: var(--text-on-ink);
+  font-size: 1rem;
+  max-width: 48ch;
+  color: var(--text-muted);
+  line-height: 1.75;
 }
 .hero-cta {
-  margin-top: 40px;
+  margin-top: 34px;
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
 }
+.hero-visual {
+  position: relative;
+  min-height: 520px;
+}
+.photo-frame {
+  position: absolute;
+  right: -64px;
+  top: 84px;
+  width: min(780px, 100%);
+  height: 370px;
+  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
+  border: 12px solid #fff;
+  box-shadow: 0 28px 70px rgba(12, 37, 122, 0.18);
+  overflow: hidden;
+  background: #eef2ff;
+}
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+  filter: saturate(1.03) contrast(1.02);
+}
+.shape {
+  position: absolute;
+  pointer-events: none;
+}
+.shape-blue {
+  top: 0;
+  left: 70px;
+  width: 420px;
+  height: 300px;
+  background: linear-gradient(135deg, #3b62dd, #2645b8);
+  clip-path: polygon(40% 0, 100% 0, 62% 100%, 0 100%);
+  z-index: 2;
+}
+.shape-light {
+  left: 0;
+  bottom: 42px;
+  width: 180px;
+  height: 118px;
+  background: linear-gradient(135deg, rgba(38, 69, 184, 0.06), rgba(16, 23, 51, 0.12));
+  clip-path: polygon(44% 0, 100% 0, 65% 100%, 0 100%);
+}
+
+/* ---- motto ---- */
+.motto-wrap {
+  position: relative;
+}
 .motto {
-  margin-top: 64px;
+  margin-top: 42px;
   display: flex;
   align-items: center;
   gap: 14px;
-  color: var(--gold-soft);
-  font-size: 0.84rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 600;
   padding-top: 28px;
-  border-top: 1px solid var(--line-ink);
+  border-top: 1px solid var(--line);
 }
 .motto :deep(.brand-mark) {
   color: var(--gold);
@@ -170,24 +181,34 @@ import CentralAsiaMap from './CentralAsiaMap.vue'
 
 @media (max-width: 900px) {
   .hero {
-    padding-top: 130px;
+    padding-top: 112px;
   }
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: 44px;
+    gap: 40px;
   }
   .hero-visual {
-    max-width: 420px;
+    min-height: 360px;
   }
-  .visual-badge {
-    left: 12px;
+  .photo-frame {
+    inset: 40px 0 auto;
+    width: 100%;
+    height: 280px;
+  }
+  .shape-blue {
+    width: 260px;
+    height: 180px;
+    left: 24px;
   }
 }
 @media (max-width: 560px) {
   .motto {
-    margin-top: 48px;
+    margin-top: 44px;
     font-size: 0.72rem;
     flex-wrap: wrap;
+  }
+  .hero-title {
+    font-size: 3rem;
   }
 }
 </style>

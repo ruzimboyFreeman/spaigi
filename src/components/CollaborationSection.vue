@@ -49,27 +49,29 @@ const channels = [
 <style scoped>
 .collab {
   position: relative;
-  background: radial-gradient(120% 130% at 100% 0%, var(--ink-3), var(--ink) 60%);
-  color: var(--text-on-ink);
+  background: var(--paper-2);
+  color: var(--text);
   overflow: hidden;
   isolation: isolate;
 }
 .grid-bg {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(30, 42, 120, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 42, 120, 0.035) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(100% 100% at 100% 0%, #000 20%, transparent 75%);
   z-index: -1;
 }
 .photo-bg {
   position: absolute;
-  inset: 0;
-  background: url('/bg/world-dots.svg') no-repeat left -200px center / 70%;
-  opacity: 0.3;
-  mask-image: linear-gradient(90deg, #000 35%, transparent 80%);
-  -webkit-mask-image: linear-gradient(90deg, #000 35%, transparent 80%);
+  top: -160px;
+  right: -120px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.22), transparent 65%);
+  filter: blur(40px);
   z-index: -2;
 }
 .collab-grid {
@@ -79,10 +81,10 @@ const channels = [
   align-items: center;
 }
 .section-title.on-ink {
-  color: var(--text-on-ink-strong);
+  color: var(--text-strong);
 }
 .lead.light {
-  color: var(--text-on-ink);
+  color: var(--text-muted);
 }
 .cta {
   margin-top: 32px;
@@ -98,24 +100,25 @@ const channels = [
   gap: 6px;
   padding: 26px 24px;
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--line-ink);
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .ch:not(.static):hover {
   transform: translateY(-3px);
   border-color: var(--gold);
-  background: rgba(47, 143, 255, 0.1);
+  box-shadow: var(--shadow);
 }
 .lbl {
   font-size: 0.74rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold-soft);
+  color: var(--gold-deep);
   font-weight: 600;
 }
 .val {
-  color: var(--text-on-ink-strong);
+  color: var(--text-strong);
   font-weight: 500;
   font-size: 1.02rem;
   word-break: break-word;

@@ -82,7 +82,7 @@ const articles = [
   inset: 0;
   z-index: -1;
   background: url('/bg/world-dots.svg') no-repeat right -160px top 50% / 68%;
-  opacity: 0.28;
+  opacity: 0.14;
   pointer-events: none;
   mask-image: linear-gradient(90deg, transparent, #000 70%);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 70%);
@@ -105,11 +105,12 @@ const articles = [
 .feature {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: radial-gradient(130% 130% at 0% 0%, var(--ink-3), var(--ink));
+  background: linear-gradient(145deg, #1e2a78 0%, #3b5bff 52%, #8b5cf6 100%);
   color: var(--text-on-ink);
   display: flex;
   min-height: 380px;
-  border: 1px solid var(--line-ink);
+  border: 1px solid transparent;
+  box-shadow: var(--shadow);
 }
 .feature-body {
   padding: 42px 40px;
@@ -142,11 +143,11 @@ const articles = [
   text-transform: uppercase;
 }
 .feature .cat {
-  color: var(--gold-soft);
+  color: #dfe4ff;
 }
 .read {
   margin-top: 26px;
-  color: var(--gold-soft);
+  color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
   display: inline-flex;

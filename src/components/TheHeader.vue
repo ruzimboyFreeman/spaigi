@@ -32,6 +32,7 @@ const go = () => (open.value = false)
 
       <nav class="nav" :class="{ open }">
         <router-link v-for="l in links" :key="l.label" :to="l.to" @click="go">{{ l.label }}</router-link>
+        <router-link to="/collaboration" class="nav-cta" @click="go">Get a Quote</router-link>
       </nav>
 
       <button class="burger" :class="{ open }" @click="open = !open" aria-label="Menu">
@@ -46,8 +47,9 @@ const go = () => (open.value = false)
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100;
+  background: rgba(255, 255, 255, 0.94);
   transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid rgba(233, 238, 251, 0.72);
   /* keep the bar pinned on mobile (avoids fixed + backdrop-filter lag on iOS) */
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
@@ -55,10 +57,11 @@ const go = () => (open.value = false)
   will-change: transform;
 }
 .hdr.solid {
-  background: rgba(11, 27, 46, 0.88);
+  background: rgba(255, 255, 255, 0.96);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
   backdrop-filter: saturate(140%) blur(14px);
-  border-bottom-color: var(--line-ink);
+  border-bottom-color: var(--line);
+  box-shadow: 0 8px 28px rgba(27, 47, 110, 0.08);
 }
 .hdr-inner {
   display: flex;
@@ -76,7 +79,7 @@ const go = () => (open.value = false)
   margin-right: auto;
 }
 .brand-logo {
-  height: 40px;
+  height: 42px;
   width: auto;
   background: #fff;
   padding: 4px 9px;
@@ -92,14 +95,20 @@ const go = () => (open.value = false)
   font-family: var(--serif);
   font-size: 1.25rem;
   letter-spacing: 0.04em;
-  color: var(--text-on-ink-strong);
+  color: var(--text-strong);
+}
+.hdr.solid .brand-text strong {
+  color: var(--text-strong);
 }
 .brand-text small {
   font-size: 0.66rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-on-ink);
+  color: var(--text-muted);
   margin-top: 5px;
+}
+.hdr.solid .brand-text small {
+  color: var(--text-muted);
 }
 .nav {
   display: flex;
@@ -107,11 +116,16 @@ const go = () => (open.value = false)
   gap: 26px;
 }
 .nav a {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-on-ink);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-strong);
   position: relative;
   transition: color 0.18s ease;
+}
+.hdr.solid .nav a {
+  color: var(--text-strong);
 }
 .nav a:not(.nav-cta)::after {
   content: '';
@@ -124,28 +138,32 @@ const go = () => (open.value = false)
   transition: width 0.22s ease;
 }
 .nav a:not(.nav-cta):hover {
-  color: var(--gold-soft);
+  color: var(--gold-deep);
 }
-.nav a:not(.nav-cta):hover::after {
-  width: 100%;
+.hdr.solid .nav a:not(.nav-cta):hover {
+  color: var(--gold-deep);
 }
 /* active menu item: persistent underline + highlighted colour */
 .nav a:not(.nav-cta).router-link-exact-active {
-  color: var(--gold-soft);
+  color: var(--gold-deep);
+}
+.hdr.solid .nav a:not(.nav-cta).router-link-exact-active {
+  color: var(--gold-deep);
 }
 .nav a:not(.nav-cta).router-link-exact-active::after {
   width: 100%;
 }
 .nav-cta {
-  padding: 9px 20px;
-  border-radius: 999px;
-  background: var(--ink);
+  padding: 13px 22px;
+  border-radius: 7px;
+  background: var(--gold);
   color: var(--text-on-ink-strong) !important;
-  font-weight: 600;
+  font-weight: 800;
   transition: background 0.18s ease, transform 0.18s ease;
+  box-shadow: var(--shadow-gold);
 }
 .nav-cta:hover {
-  background: var(--ink-3);
+  background: var(--gold-deep);
   transform: translateY(-1px);
 }
 .burger {
@@ -160,8 +178,11 @@ const go = () => (open.value = false)
 .burger span {
   width: 24px;
   height: 2px;
-  background: var(--text-on-ink-strong);
+  background: var(--ink);
   transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease;
+}
+.hdr.solid .burger span {
+  background: var(--ink);
 }
 .burger.open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);

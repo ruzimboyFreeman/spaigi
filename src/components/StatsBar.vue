@@ -20,20 +20,22 @@ const stats = [
 
 <style scoped>
 .stats {
-  background: var(--ink-2);
-  color: var(--text-on-ink);
-  border-top: 1px solid var(--line-ink);
+  background: var(--paper);
 }
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding-block: 38px;
+  padding: 44px 32px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding-inline: 8px;
+  gap: 6px;
+  padding-inline: 14px;
   position: relative;
 }
 .stat + .stat::before {
@@ -43,19 +45,22 @@ const stats = [
   top: 10%;
   height: 80%;
   width: 1px;
-  background: var(--line-ink);
+  background: var(--line);
 }
 .num {
   font-family: var(--serif);
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  color: var(--gold-soft);
+  font-size: clamp(2.1rem, 4vw, 3rem);
   line-height: 1;
+  background: var(--grad-soft);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .lbl {
   font-size: 0.82rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-on-ink);
+  color: var(--text-muted);
 }
 @media (max-width: 700px) {
   .stats-grid {

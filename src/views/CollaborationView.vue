@@ -147,7 +147,7 @@ const areas = [
   right: -120px;
   width: 520px;
   height: 520px;
-  background: radial-gradient(circle, rgba(47, 143, 255, 0.3), transparent 65%);
+  background: radial-gradient(circle, rgba(59, 91, 255, 0.3), transparent 65%);
   filter: blur(20px);
   z-index: -1;
 }
@@ -176,7 +176,7 @@ const areas = [
   font-weight: 600;
   color: var(--gold-soft);
   background: var(--gold-bg);
-  border: 1px solid rgba(109, 184, 255, 0.25);
+  border: 1px solid rgba(125, 146, 255, 0.25);
   border-radius: 999px;
   padding: 7px 16px;
 }
