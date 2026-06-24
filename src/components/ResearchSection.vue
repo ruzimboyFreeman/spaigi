@@ -105,7 +105,7 @@ const articles = [
 .feature {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: linear-gradient(145deg, #1e2a78 0%, #3b5bff 52%, #8b5cf6 100%);
+  background: linear-gradient(145deg, #1e2a78 0%, #3d63d8 52%, #ec2c8a 100%);
   color: var(--text-on-ink);
   display: flex;
   min-height: 380px;

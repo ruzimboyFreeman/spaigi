@@ -19,10 +19,11 @@
   --gold-soft: #6f8af7;
   --gold-deep: #284fca;
   --gold-bg: rgba(61, 99, 216, 0.11);
-  --violet: #7654e8;
-  --pink: #f25b9f;
-  --grad: linear-gradient(120deg, #063fb9 0%, #4458d6 43%, #8350df 72%, #f45f9c 100%);
-  --grad-soft: linear-gradient(120deg, #3262dd 0%, #7654e8 56%, #f25b9f 100%);
+  --pink: #ec2c8a;
+  --pink-2: #f24a9e;
+  --pink-grad: linear-gradient(135deg, #ec2c8a, #f24a9e);
+  --grad: linear-gradient(120deg, #3d63d8 0%, #ec2c8a 100%);
+  --grad-soft: linear-gradient(120deg, #3d63d8 0%, #f24a9e 100%);
 
   --maxw: 1400px;
   --radius: 8px;

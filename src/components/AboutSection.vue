@@ -175,7 +175,7 @@ const pillars = [
   padding: 14px 42px 14px 105px;
   z-index: 5;
   color: #fff;
-  background: linear-gradient(135deg, #3b3f9e, #2c2f86);
+  background: linear-gradient(135deg, #3d63d8, #284fca);
   clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%);
   display: flex;
   flex-direction: column;
@@ -202,7 +202,7 @@ const pillars = [
   width: 145px;
   height: 168px;
   z-index: 4;
-  background: linear-gradient(135deg, #ec2c8a, #f24a9e);
+  background: var(--pink-grad);
   clip-path: polygon(0 0, 55% 0, 100% 50%, 55% 100%, 0 100%, 45% 50%);
 }
 .chevron-one {
@@ -210,7 +210,7 @@ const pillars = [
 }
 .chevron-two {
   left: 285px;
-  background: linear-gradient(135deg, #3b3f9e, #2c2f86);
+  background: linear-gradient(135deg, #3d63d8, #284fca);
 }
 .bottom-bar {
   position: absolute;
@@ -218,7 +218,7 @@ const pillars = [
   bottom: 0;
   left: 0;
   height: 24px;
-  background: linear-gradient(90deg, #1e2470, #3b3f9e 60%, #4044a8);
+  background: linear-gradient(90deg, #1e2470, #3d63d8 60%, #284fca);
 }
 .pillars {
   display: grid;

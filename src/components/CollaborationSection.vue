@@ -1,10 +1,23 @@
 <script setup>
-const channels = [
-  { label: 'General enquiries', value: 'contact@spaigi.uz', href: 'mailto:contact@spaigi.uz' },
-  { label: 'Office of the Director', value: 'president@spaigi.uz', href: 'mailto:president@spaigi.uz' },
-  { label: 'Web', value: 'www.spaigi.uz · www.spaigi.org', href: 'https://www.spaigi.uz' },
-  { label: 'Location', value: 'Tashkent, Uzbekistan', href: null },
-]
+import { reactive } from 'vue'
+
+const form = reactive({
+  firstName: '',
+  lastName: '',
+  email: '',
+  message: '',
+})
+
+const sendMessage = () => {
+  const subject = encodeURIComponent(
+    `Collaboration enquiry from ${form.firstName} ${form.lastName}`
+  )
+  const body = encodeURIComponent(
+    `Name: ${form.firstName} ${form.lastName}\nEmail: ${form.email}\n\n${form.message}`
+  )
+
+  window.location.href = `mailto:contact@spaigi.uz?subject=${subject}&body=${body}`
+}
 </script>
 
 <template>
@@ -22,26 +35,61 @@ const channels = [
           collaboration projects within the mission of SPAIGI, please contact us — or donate
           now and become a partner.
         </p>
-        <div class="cta" v-reveal="220">
-          <a href="mailto:contact@spaigi.uz" class="btn btn-primary">
-            Start a conversation <span class="arrow">→</span>
-          </a>
-        </div>
       </div>
 
-      <div class="cards">
-        <a
-          v-for="(c, i) in channels"
-          :key="c.label"
-          class="ch"
-          :class="{ static: !c.href }"
-          :href="c.href || undefined"
-          v-reveal="i * 80"
-        >
-          <span class="lbl">{{ c.label }}</span>
-          <span class="val">{{ c.value }}</span>
-        </a>
-      </div>
+      <form class="contact-form" @submit.prevent="sendMessage" v-reveal="120">
+        <div class="field-row">
+          <label>
+            <span>First name</span>
+            <input
+              v-model.trim="form.firstName"
+              type="text"
+              name="firstName"
+              autocomplete="given-name"
+              placeholder="First name"
+              required
+            />
+          </label>
+          <label>
+            <span>Last name</span>
+            <input
+              v-model.trim="form.lastName"
+              type="text"
+              name="lastName"
+              autocomplete="family-name"
+              placeholder="Last name"
+              required
+            />
+          </label>
+        </div>
+
+        <label>
+          <span>Email address</span>
+          <input
+            v-model.trim="form.email"
+            type="email"
+            name="email"
+            autocomplete="email"
+            placeholder="name@example.com"
+            required
+          />
+        </label>
+
+        <label>
+          <span>Message</span>
+          <textarea
+            v-model.trim="form.message"
+            name="message"
+            rows="5"
+            placeholder="Tell us about your proposal or project"
+            required
+          ></textarea>
+        </label>
+
+        <button type="submit" class="btn btn-primary">
+          Send Message <span class="arrow">→</span>
+        </button>
+      </form>
     </div>
   </section>
 </template>
@@ -86,42 +134,57 @@ const channels = [
 .lead.light {
   color: var(--text-muted);
 }
-.cta {
-  margin-top: 32px;
-}
-.cards {
+.contact-form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.ch {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 26px 24px;
-  border-radius: var(--radius);
+  gap: 18px;
+  padding: 30px;
+  border-radius: 8px;
   background: #fff;
   border: 1px solid var(--line);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.ch:not(.static):hover {
-  transform: translateY(-3px);
-  border-color: var(--gold);
   box-shadow: var(--shadow);
 }
-.lbl {
-  font-size: 0.74rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold-deep);
-  font-weight: 600;
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
-.val {
+.contact-form label {
+  display: grid;
+  gap: 7px;
+}
+.contact-form label > span {
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--text-strong);
-  font-weight: 500;
-  font-size: 1.02rem;
-  word-break: break-word;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--paper-2);
+  color: var(--text-strong);
+  font: inherit;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.contact-form textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #a2a8ba;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--gold);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--gold-bg);
+}
+.contact-form .btn {
+  justify-self: start;
 }
 @media (max-width: 860px) {
   .collab-grid {
@@ -130,8 +193,11 @@ const channels = [
   }
 }
 @media (max-width: 460px) {
-  .cards {
+  .field-row {
     grid-template-columns: 1fr;
+  }
+  .contact-form {
+    padding: 22px;
   }
 }
 </style>

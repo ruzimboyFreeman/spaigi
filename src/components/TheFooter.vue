@@ -66,7 +66,7 @@ const cols = [
 <style scoped>
 .ftr {
   position: relative;
-  background: linear-gradient(120deg, #1a2470 0%, #2742d8 52%, #6d3fd1 100%);
+  background: linear-gradient(120deg, #1a2470 0%, #3d63d8 52%, #ec2c8a 100%);
   color: var(--text-on-ink);
   padding: 84px 0 34px;
   overflow: hidden;

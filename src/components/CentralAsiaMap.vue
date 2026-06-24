@@ -39,7 +39,7 @@ const pathFor = (c) => `path('M ${uz.x} ${uz.y} L ${c.x} ${c.y}')`
         <stop offset="100%" stop-color="#3b5bff" />
       </linearGradient>
       <linearGradient id="uzFill" x1="0" y1="0" x2="0.6" y2="1">
-        <stop offset="0%" stop-color="#7280cf" />
+        <stop offset="0%" stop-color="#3d63d8" />
         <stop offset="100%" stop-color="#2742d8" />
       </linearGradient>
       <filter id="uzGlow" x="-30%" y="-30%" width="160%" height="160%">

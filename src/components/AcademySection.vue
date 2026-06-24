@@ -55,7 +55,7 @@ const features = [
   background:
     radial-gradient(circle at 0 10%, rgba(0, 95, 255, 0.42), transparent 28%),
     radial-gradient(circle at 100% 0, rgba(242, 91, 159, 0.34), transparent 34%),
-    linear-gradient(125deg, #0046b6 0%, #142a8f 43%, #613290 74%, #9b3d91 100%);
+    linear-gradient(125deg, #0046b6 0%, #1e2470 40%, #3d63d8 70%, #ec2c8a 100%);
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -112,7 +112,7 @@ const features = [
   display: grid;
   place-items: center;
   color: #fff;
-  background: linear-gradient(145deg, #ff6ca9, #f24e94);
+  background: linear-gradient(135deg, #ec2c8a, #f24a9e);
   border-radius: 21px;
   clip-path: polygon(50% 0, 94% 25%, 94% 75%, 50% 100%, 6% 75%, 6% 25%);
   box-shadow: 0 16px 32px rgba(242, 91, 159, 0.28);
