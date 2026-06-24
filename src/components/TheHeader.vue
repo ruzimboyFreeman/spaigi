@@ -23,7 +23,6 @@ const go = () => (open.value = false)
   <header class="hdr" :class="{ solid: scrolled }">
     <div class="container hdr-inner">
       <router-link :to="{ path: '/', hash: '#top' }" class="brand" @click="go">
-        <img src="/img/logo-mark.png" alt="SPAIGI logo" class="brand-logo" />
         <span class="brand-text">
           <strong>SPAIGI</strong>
           <small>Strategic Policy &amp; AI Governance</small>
@@ -32,7 +31,6 @@ const go = () => (open.value = false)
 
       <nav class="nav" :class="{ open }">
         <router-link v-for="l in links" :key="l.label" :to="l.to" @click="go">{{ l.label }}</router-link>
-        <router-link to="/collaboration" class="nav-cta" @click="go">Get a Quote</router-link>
       </nav>
 
       <button class="burger" :class="{ open }" @click="open = !open" aria-label="Menu">
@@ -47,9 +45,8 @@ const go = () => (open.value = false)
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.94);
+  background: #fff;
   transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  border-bottom: 1px solid rgba(233, 238, 251, 0.72);
   /* keep the bar pinned on mobile (avoids fixed + backdrop-filter lag on iOS) */
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
@@ -57,34 +54,23 @@ const go = () => (open.value = false)
   will-change: transform;
 }
 .hdr.solid {
-  background: rgba(255, 255, 255, 0.96);
-  -webkit-backdrop-filter: saturate(140%) blur(14px);
-  backdrop-filter: saturate(140%) blur(14px);
-  border-bottom-color: var(--line);
-  box-shadow: 0 8px 28px rgba(27, 47, 110, 0.08);
+  background: #fff;
 }
 .hdr-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 74px;
+  width: 1720px;
   max-width: 100%;
+  margin-inline: auto;
   padding-inline: 20px;
 }
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
   color: var(--ink);
   margin-right: auto;
-}
-.brand-logo {
-  height: 42px;
-  width: auto;
-  background: #fff;
-  padding: 4px 9px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(10, 19, 34, 0.16);
 }
 .brand-text {
   display: flex;
@@ -113,58 +99,48 @@ const go = () => (open.value = false)
 .nav {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 5px;
+  padding: 5px;
+  border-radius: 9px;
+  background: #fff;
 }
 .nav a {
   font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0;
   color: var(--text-strong);
   position: relative;
-  transition: color 0.18s ease;
+  padding: 9px 14px;
+  border-radius: 6px;
+  transition: color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
 .hdr.solid .nav a {
   color: var(--text-strong);
 }
-.nav a:not(.nav-cta)::after {
+.nav a:hover {
+  color: var(--gold-deep);
+  background: #fff;
+}
+.hdr.solid .nav a:hover {
+  color: var(--gold-deep);
+}
+.nav a.router-link-exact-active {
+  color: var(--gold-deep);
+  background: transparent;
+  box-shadow: none;
+}
+.nav a.router-link-exact-active::after {
   content: '';
   position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 0;
+  left: 14px;
+  right: 14px;
+  bottom: 2px;
   height: 2px;
   background: var(--gold);
-  transition: width 0.22s ease;
+  border-radius: 2px;
 }
-.nav a:not(.nav-cta):hover {
+.hdr.solid .nav a.router-link-exact-active {
   color: var(--gold-deep);
-}
-.hdr.solid .nav a:not(.nav-cta):hover {
-  color: var(--gold-deep);
-}
-/* active menu item: persistent underline + highlighted colour */
-.nav a:not(.nav-cta).router-link-exact-active {
-  color: var(--gold-deep);
-}
-.hdr.solid .nav a:not(.nav-cta).router-link-exact-active {
-  color: var(--gold-deep);
-}
-.nav a:not(.nav-cta).router-link-exact-active::after {
-  width: 100%;
-}
-.nav-cta {
-  padding: 13px 22px;
-  border-radius: 7px;
-  background: var(--gold);
-  color: var(--text-on-ink-strong) !important;
-  font-weight: 800;
-  transition: background 0.18s ease, transform 0.18s ease;
-  box-shadow: var(--shadow-gold);
-}
-.nav-cta:hover {
-  background: var(--gold-deep);
-  transform: translateY(-1px);
 }
 .burger {
   display: none;
@@ -202,10 +178,11 @@ const go = () => (open.value = false)
     position: fixed;
     inset: 74px 0 auto 0;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     align-items: stretch;
     background: var(--paper);
     border-bottom: 1px solid var(--line);
+    border-radius: 0;
     padding: 18px 28px 26px;
     transform: translateY(-12px);
     opacity: 0;
@@ -218,15 +195,10 @@ const go = () => (open.value = false)
     pointer-events: auto;
   }
   .nav a {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 1rem;
-    color: var(--text); /* panel has a light background */
-  }
-  .nav-cta {
-    text-align: center;
-    margin-top: 10px;
-    border-bottom: 0 !important;
+    padding: 12px 14px;
+    border: 0;
+    font-size: 0.94rem;
+    color: var(--text);
   }
 }
 </style>

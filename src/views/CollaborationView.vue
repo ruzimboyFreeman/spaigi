@@ -290,6 +290,10 @@ const areas = [
 }
 .p-visual img {
   width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  display: block;
   background: #fff;
   border-radius: var(--radius-lg);
   padding: 28px;

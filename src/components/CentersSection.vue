@@ -39,42 +39,62 @@ const centers = [
   <section id="centers" class="section centers">
     <div class="container">
       <div class="centers-head">
-        <p class="eyebrow on-ink" v-reveal>Centers &amp; Projects</p>
-        <h2 class="section-title on-ink" v-reveal="80">We offer a wide variety of policy and AI services.</h2>
+        <div class="head-title">
+          <p class="eyebrow on-ink" v-reveal>Our Services</p>
+          <h2 class="section-title on-ink" v-reveal="80">
+            We offer a wide variety of policy and AI services.
+          </h2>
+        </div>
         <p class="lead light" v-reveal="160">
-          Our work is organized into specialized centers, each addressing a distinct dimension
-          of strategic policy and AI governance.
+          We leverage proven research methods, regional expertise, and practical policy
+          experience to support responsible AI governance.
         </p>
-      </div>
-
-      <div class="cards">
-        <article
-          v-for="(c, i) in centers"
-          :key="c.tag"
-          class="card"
-          :class="{ featured: i === 2 }"
-          :style="{ '--card-img': `url(${c.image})` }"
-          v-reveal="i * 120"
-        >
-          <div class="icon">
-            <svg viewBox="0 0 24 24" width="26" height="26" fill="none"
-              stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path :d="c.icon" />
-            </svg>
-          </div>
-          <div class="card-copy">
-            <span class="tag">{{ c.tag }}</span>
-            <h3>{{ c.title }}</h3>
-            <p>{{ c.body }}</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="more" v-reveal>
-        <router-link to="/centers" class="btn btn-primary">
-          Explore centers &amp; projects <span class="arrow">→</span>
+        <router-link to="/centers" class="btn btn-primary head-button" v-reveal="200">
+          All Services <span class="arrow">→</span>
         </router-link>
+      </div>
+
+      <div class="services-row">
+        <div class="cards">
+          <article
+            v-for="(c, i) in centers"
+            :key="c.tag"
+            class="card"
+            :class="{ featured: i === 2 }"
+            v-reveal="i * 120"
+          >
+            <img :src="c.image" :alt="c.title" class="card-image" />
+            <span class="card-shade" aria-hidden="true"></span>
+
+            <div v-if="i === 2" class="featured-panel">
+              <div class="featured-icon">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none"
+                  stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path :d="c.icon" />
+                </svg>
+              </div>
+              <h3>{{ c.tag }}</h3>
+              <p>{{ c.body }}</p>
+            </div>
+
+            <div v-else class="card-caption">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" width="25" height="25" fill="none"
+                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path :d="c.icon" />
+                </svg>
+              </div>
+              <h3>{{ c.tag }}</h3>
+            </div>
+          </article>
+        </div>
+
+        <div class="slider-controls" aria-label="Service navigation" v-reveal="320">
+          <button type="button" aria-label="Next service">›</button>
+          <button type="button" class="prev" aria-label="Previous service">‹</button>
+        </div>
       </div>
     </div>
   </section>
@@ -87,6 +107,10 @@ const centers = [
   position: relative;
   overflow: hidden;
   isolation: isolate;
+}
+.centers .container {
+  width: 1720px;
+  max-width: 100%;
 }
 .centers::before {
   content: '';
@@ -106,97 +130,173 @@ const centers = [
   color: var(--text-muted);
 }
 .centers-head {
-  max-width: 840px;
-  margin-bottom: 56px;
+  display: grid;
+  grid-template-columns: minmax(380px, 1.15fr) minmax(300px, 0.85fr) auto;
+  gap: 54px;
+  align-items: center;
+  margin-bottom: 52px;
+}
+.head-title .section-title {
+  max-width: 19ch;
+}
+.centers-head .lead {
+  margin-top: 24px;
+  max-width: 43ch;
+}
+.head-button {
+  align-self: center;
+}
+.services-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46px;
+  gap: 18px;
+  align-items: end;
+  width: 100%;
+  transform: none;
 }
 .cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
 }
 .card {
-  min-height: 310px;
+  aspect-ratio: 1.28 / 1;
+  min-height: 0;
   border: 0;
   border-radius: 8px;
-  padding: 26px 24px;
+  padding: 0;
   box-shadow: 0 14px 36px rgba(16, 37, 105, 0.16);
-  background:
-    linear-gradient(180deg, rgba(5, 17, 62, 0.06) 0%, rgba(11, 29, 95, 0.76) 70%, rgba(4, 18, 72, 0.96) 100%),
-    var(--card-img) center / cover;
   color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
   position: relative;
   overflow: hidden;
-  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  background: #dfe5f2;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
-.card::before {
-  content: '';
+.card-image {
   position: absolute;
   inset: 0;
-  background: linear-gradient(140deg, rgba(61, 99, 216, 0.35), transparent 48%);
-  opacity: 0;
-  transition: opacity 0.22s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.card-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 22, 74, 0.02) 24%,
+    rgba(20, 51, 132, 0.3) 58%,
+    rgba(13, 39, 113, 0.96) 100%
+  );
 }
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 20px 48px rgba(16, 37, 105, 0.22);
 }
-.card:hover::before,
-.card.featured::before {
-  opacity: 1;
+.card-caption {
+  position: absolute;
+  right: 22px;
+  bottom: 24px;
+  left: 22px;
+  z-index: 2;
 }
 .icon {
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  margin-bottom: 18px;
-  position: relative;
-  z-index: 1;
-}
-.card.featured .icon {
-  background: #fff;
-  color: var(--gold);
-}
-.card-copy {
-  position: relative;
-  z-index: 1;
-}
-.tag {
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 13px;
 }
 .card h3 {
   color: #fff;
-  font-size: 1.12rem;
-  margin: 10px 0 12px;
+  font-size: 1.04rem;
+  margin: 0;
   letter-spacing: -0.01em;
 }
-.card p {
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.9rem;
+.featured-panel {
+  position: absolute;
+  z-index: 3;
+  right: 22px;
+  bottom: 22px;
+  left: 22px;
+  padding: 25px 28px 24px;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 16px 34px rgba(10, 26, 79, 0.2);
+}
+.featured-icon {
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.featured-panel h3 {
+  color: var(--text-strong);
+  font-size: 1.03rem;
+  margin-bottom: 10px;
+}
+.featured-panel p {
+  color: var(--text-muted);
+  font-size: 0.86rem;
   line-height: 1.65;
 }
-.more {
-  margin-top: 44px;
-  text-align: center;
+.slider-controls {
+  display: grid;
+  gap: 8px;
 }
-@media (max-width: 900px) {
+.slider-controls button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--gold);
+  color: #fff;
+  font: 700 1.5rem/1 var(--sans);
+  cursor: pointer;
+  box-shadow: var(--shadow-gold);
+}
+.slider-controls .prev {
+  background: #fff;
+  color: var(--text-muted);
+  border-color: var(--line);
+  box-shadow: var(--shadow-sm);
+}
+@media (max-width: 1050px) {
+  .centers-head {
+    grid-template-columns: 1fr 1fr;
+  }
+  .head-button {
+    justify-self: start;
+  }
   .cards {
     grid-template-columns: repeat(2, 1fr);
   }
+  .card {
+    aspect-ratio: 1.35 / 1;
+  }
 }
-@media (max-width: 620px) {
+@media (max-width: 700px) {
+  .centers-head {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .centers-head .lead {
+    margin-top: 0;
+  }
+  .services-row {
+    grid-template-columns: 1fr;
+    width: 100%;
+    transform: none;
+  }
   .cards {
     grid-template-columns: 1fr;
+  }
+  .slider-controls {
+    grid-template-columns: repeat(2, 42px);
+    justify-content: end;
   }
 }
 </style>

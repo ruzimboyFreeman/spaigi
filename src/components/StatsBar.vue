@@ -30,6 +30,8 @@ const stats = [
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+  width: 1720px;
+  max-width: 100%;
 }
 .stat {
   display: flex;

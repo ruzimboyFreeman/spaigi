@@ -8,7 +8,7 @@ const director = {
 
 // Strategic Advisory Board — shown separately, above the leadership.
 const advisory = [
-  { name: 'Mr. Sherzod Ziyoyev', role: 'Expert · Analyst', photo: '/img/team-sherzod.jpg' },
+  { name: 'Dr. Sherzod Ziyoyev', role: 'Expert · Analyst', photo: '/img/team-sherzod.jpg' },
   { name: 'Mr. Muhiddin Omanov', role: 'Expert · Politician', photo: '/img/team-muhiddin.jpg' },
   { name: 'Ms. Dildora Omonova', role: 'President Prize Winner · Expert', photo: '/img/team-dildora.jpg' },
 ]
@@ -103,8 +103,8 @@ const team = [
 }
 .avatar {
   border-radius: 50%;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
   width: 56px;
   height: 56px;
   flex: none;
@@ -242,8 +242,8 @@ const team = [
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
   background: var(--paper-2);
 }
 .member h4 {

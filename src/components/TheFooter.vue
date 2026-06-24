@@ -33,7 +33,6 @@ const cols = [
       <div class="top">
         <div class="brand-col">
           <router-link :to="{ path: '/', hash: '#top' }" class="brand">
-            <img src="/img/logo-mark.png" alt="SPAIGI logo" class="brand-logo" />
             <strong>SPAIGI</strong>
           </router-link>
           <p>
@@ -100,13 +99,6 @@ const cols = [
   gap: 12px;
   color: #fff;
   margin-bottom: 18px;
-}
-.brand-logo {
-  height: 44px;
-  width: auto;
-  background: #fff;
-  padding: 5px 10px;
-  border-radius: 11px;
 }
 .brand strong {
   font-family: var(--serif);

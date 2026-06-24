@@ -1,7 +1,3 @@
-<script setup>
-import BrandMark from './BrandMark.vue'
-</script>
-
 <template>
   <section id="top" class="hero">
     <div class="hero-dots hero-dots-a" aria-hidden="true"></div>
@@ -32,6 +28,8 @@ import BrandMark from './BrandMark.vue'
       <div class="hero-visual" v-reveal="200">
         <div class="shape shape-blue" aria-hidden="true"></div>
         <div class="shape shape-light" aria-hidden="true"></div>
+        <div class="shape shape-divider" aria-hidden="true"></div>
+        <div class="shape shape-corner" aria-hidden="true"></div>
         <div class="photo-frame">
           <img src="/img/hero-bg.jpg" alt="SPAIGI experts at the Global Forum on AI in Government" />
         </div>
@@ -40,7 +38,6 @@ import BrandMark from './BrandMark.vue'
 
     <div class="container motto-wrap">
       <div class="motto" v-reveal="320">
-        <BrandMark :size="22" />
         <span>Towards Strategic Policy&nbsp;&rsaquo;&nbsp; Governing AI&nbsp;&rsaquo;&nbsp; Securing the Sustainable Future</span>
       </div>
     </div>
@@ -83,8 +80,9 @@ import BrandMark from './BrandMark.vue'
   grid-template-columns: minmax(360px, 0.78fr) minmax(520px, 1.1fr);
   gap: 52px;
   align-items: center;
+  width: 1720px;
+  max-width: 100%;
 }
-
 /* ---- copy ---- */
 .hero-title {
   font-size: clamp(3.2rem, 6vw, 5.7rem);
@@ -114,49 +112,87 @@ import BrandMark from './BrandMark.vue'
 }
 .hero-visual {
   position: relative;
-  min-height: 520px;
+  min-height: 560px;
 }
 .photo-frame {
   position: absolute;
-  right: -64px;
-  top: 84px;
-  width: min(780px, 100%);
-  height: 370px;
-  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
-  border: 12px solid #fff;
+  left: 100px;
+  right: 0;
+  top: 28px;
+  bottom: 0;
+  height: auto;
+  border-radius: 8px 0 0 8px;
   box-shadow: 0 28px 70px rgba(12, 37, 122, 0.18);
   overflow: hidden;
   background: #eef2ff;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 95px),
+    calc(100% - 116px) 100%,
+    0 100%
+  );
+  z-index: 2;
 }
 .photo-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 58%;
+  object-position: 78% center;
   filter: saturate(1.03) contrast(1.02);
+}
+.photo-frame::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 118%;
+  height: 16px;
+  background: #fff;
+  transform: rotate(-39deg);
+  transform-origin: 0 100%;
+  pointer-events: none;
+  z-index: 3;
 }
 .shape {
   position: absolute;
   pointer-events: none;
 }
 .shape-blue {
-  top: 0;
-  left: 70px;
-  width: 420px;
-  height: 300px;
+  top: -105px;
+  left: -260px;
+  width: 780px;
+  height: 450px;
   background: linear-gradient(135deg, #3b62dd, #2645b8);
-  clip-path: polygon(40% 0, 100% 0, 62% 100%, 0 100%);
-  z-index: 2;
+  clip-path: polygon(70% 15%, 100% 15%, 40% 100%, 40% 55%);
+  z-index: 5;
 }
 .shape-light {
-  left: 0;
-  bottom: 42px;
-  width: 180px;
-  height: 118px;
-  background: linear-gradient(135deg, rgba(38, 69, 184, 0.06), rgba(16, 23, 51, 0.12));
-  clip-path: polygon(44% 0, 100% 0, 65% 100%, 0 100%);
+  right: auto;
+  left: -218px;
+  bottom: 0;
+  width: 270px;
+  height: 220px;
+  background: linear-gradient(135deg, #2645b80f, #1017331f);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  z-index: 3;
 }
-
+.shape-divider {
+  top: -26px;
+  bottom: 20px;
+  left: 100px;
+  width: 20px;
+  background: #fff;
+  z-index: 4;
+}
+.shape-corner {
+  top: 28px;
+  left: 100px;
+  width: 150px;
+  height: 150px;
+  background: #fff;
+  z-index: 4;
+}
 /* ---- motto ---- */
 .motto-wrap {
   position: relative;
@@ -174,11 +210,6 @@ import BrandMark from './BrandMark.vue'
   padding-top: 28px;
   border-top: 1px solid var(--line);
 }
-.motto :deep(.brand-mark) {
-  color: var(--gold);
-  flex: none;
-}
-
 @media (max-width: 900px) {
   .hero {
     padding-top: 112px;
@@ -194,11 +225,34 @@ import BrandMark from './BrandMark.vue'
     inset: 40px 0 auto;
     width: 100%;
     height: 280px;
+    bottom: auto;
+    border-radius: 8px;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 90px),
+      calc(100% - 110px) 100%,
+      0 100%
+    );
   }
   .shape-blue {
     width: 260px;
     height: 180px;
     left: 24px;
+  }
+  .shape-light {
+    right: auto;
+    left: -140px;
+    bottom: 40px;
+    width: 110px;
+    height: 90px;
+  }
+  .shape-divider {
+    top: 20px;
+    bottom: auto;
+    left: 0;
+    width: 10px;
+    height: 280px;
   }
 }
 @media (max-width: 560px) {

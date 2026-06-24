@@ -218,7 +218,11 @@ const approach = [
 }
 .hero-badge img {
   width: 100%;
+  height: auto;
   max-width: 300px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
   background: #fff;
   border-radius: var(--radius-lg);
   padding: 22px;
@@ -283,8 +287,8 @@ const approach = [
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
   flex: none;
   background: var(--paper-2);
 }

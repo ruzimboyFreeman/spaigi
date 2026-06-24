@@ -59,6 +59,7 @@ const features = [
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  z-index: 1;
   color: var(--text-on-ink);
 }
 .academy::before {

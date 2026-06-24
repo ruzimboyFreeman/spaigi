@@ -12,11 +12,11 @@ import CollaborationSection from '../components/CollaborationSection.vue'
 <template>
   <main>
     <HeroSection />
+    <CentersSection />
     <StatsBar />
     <AboutSection />
-    <CentersSection />
-    <ResearchSection />
     <AcademySection />
+    <ResearchSection />
     <TeamSection />
     <CollaborationSection />
   </main>
