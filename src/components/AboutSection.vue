@@ -210,9 +210,7 @@ const pillars = [
 }
 .chevron-two {
   left: 285px;
-  //opacity: 0.95;
   background: linear-gradient(135deg, #3b3f9e, #2c2f86);
-
 }
 .bottom-bar {
   position: absolute;
