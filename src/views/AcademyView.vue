@@ -105,7 +105,7 @@ const approach = [
               <ul>
                 <li v-for="n in m.notes" :key="n">{{ n }}</li>
               </ul>
-              <a :href="`mailto:${m.email}`" class="mail">{{ m.email }}</a>
+              <router-link :to="{ path: '/', hash: '#contact' }" class="mail">{{ m.email }}</router-link>
             </div>
           </article>
         </div>
@@ -155,9 +155,9 @@ const approach = [
           <h2>Explore the professions of the future.</h2>
           <p>Contact us today to begin — or request the detailed list of our training programs.</p>
         </div>
-        <a href="mailto:contact@spaigi.org?subject=SPAIGI%20Academy%20programs" class="btn btn-primary">
+        <router-link :to="{ path: '/', hash: '#contact' }" class="btn btn-primary">
           Contact the Academy <span class="arrow">→</span>
-        </a>
+        </router-link>
       </div>
     </section>
   </main>

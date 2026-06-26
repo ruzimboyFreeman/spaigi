@@ -19,8 +19,8 @@ const cols = [
   {
     title: 'Contact',
     links: [
-      { label: 'contact@spaigi.uz', href: 'mailto:contact@spaigi.uz' },
-      { label: 'president@spaigi.uz', href: 'mailto:president@spaigi.uz' },
+      { label: 'contact@spaigi.uz', to: { path: '/', hash: '#contact' } },
+      { label: 'president@spaigi.uz', to: { path: '/', hash: '#contact' } },
       { label: 'Tashkent, Uzbekistan', to: { path: '/', hash: '#contact' } },
     ],
   },

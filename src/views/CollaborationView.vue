@@ -91,9 +91,9 @@ const areas = [
             regionally and globally.
           </p>
           <div class="p-cta" v-reveal="240">
-            <a href="mailto:president@spaigi.uz,contact@spaigi.uz?subject=Partnership%20Proposal" class="btn btn-primary">
+            <router-link :to="{ path: '/', hash: '#contact' }" class="btn btn-primary">
               Explore partnership <span class="arrow">→</span>
-            </a>
+            </router-link>
             <router-link :to="{ path: '/', hash: '#contact' }" class="btn btn-ghost">Become a partner</router-link>
           </div>
         </div>

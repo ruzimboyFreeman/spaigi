@@ -1,22 +1,57 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 const form = reactive({
   firstName: '',
   lastName: '',
   email: '',
   message: '',
+  website: '',
 })
 
-const sendMessage = () => {
-  const subject = encodeURIComponent(
-    `Collaboration enquiry from ${form.firstName} ${form.lastName}`
-  )
-  const body = encodeURIComponent(
-    `Name: ${form.firstName} ${form.lastName}\nEmail: ${form.email}\n\n${form.message}`
-  )
+const contactForm = ref(null)
+const status = ref('idle')
+const feedback = ref('')
 
-  window.location.href = `mailto:contact@spaigi.uz?subject=${subject}&body=${body}`
+const sendMessage = async (event) => {
+  event?.preventDefault()
+  event?.stopPropagation()
+
+  if (status.value === 'sending') return
+  if (contactForm.value && !contactForm.value.reportValidity()) return
+
+  status.value = 'sending'
+  feedback.value = ''
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    })
+    const contentType = response.headers.get('content-type') || ''
+    const result = contentType.includes('application/json')
+      ? await response.json()
+      : {}
+
+    if (!response.ok) {
+      throw new Error(result.error || 'The message could not be sent.')
+    }
+    if (!result.ok) {
+      throw new Error('The email service returned an invalid response.')
+    }
+
+    form.firstName = ''
+    form.lastName = ''
+    form.email = ''
+    form.message = ''
+    form.website = ''
+    status.value = 'success'
+    feedback.value = 'Your message has been sent successfully.'
+  } catch (error) {
+    status.value = 'error'
+    feedback.value = error.message || 'The message could not be sent.'
+  }
 }
 </script>
 
@@ -37,7 +72,23 @@ const sendMessage = () => {
         </p>
       </div>
 
-      <form class="contact-form" @submit.prevent="sendMessage" v-reveal="120">
+      <form
+        ref="contactForm"
+        class="contact-form"
+        @submit.prevent.stop="sendMessage"
+        v-reveal="120"
+      >
+        <label class="honeypot" aria-hidden="true">
+          <span>Website</span>
+          <input
+            v-model="form.website"
+            type="text"
+            name="website"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </label>
+
         <div class="field-row">
           <label>
             <span>First name</span>
@@ -86,9 +137,24 @@ const sendMessage = () => {
           ></textarea>
         </label>
 
-        <button type="submit" class="btn btn-primary">
-          Send Message <span class="arrow">→</span>
+        <button
+          type="button"
+          class="btn btn-primary"
+          :disabled="status === 'sending'"
+          @click.prevent.stop="sendMessage"
+        >
+          {{ status === 'sending' ? 'Sending...' : 'Send Message' }}
+          <span v-if="status !== 'sending'" class="arrow">→</span>
         </button>
+
+        <p
+          v-if="feedback"
+          class="form-feedback"
+          :class="{ success: status === 'success', error: status === 'error' }"
+          role="status"
+        >
+          {{ feedback }}
+        </p>
       </form>
     </div>
   </section>
@@ -135,6 +201,7 @@ const sendMessage = () => {
   color: var(--text-muted);
 }
 .contact-form {
+  position: relative;
   display: grid;
   gap: 18px;
   padding: 30px;
@@ -142,6 +209,14 @@ const sendMessage = () => {
   background: #fff;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
+}
+.honeypot {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 .field-row {
   display: grid;
@@ -185,6 +260,22 @@ const sendMessage = () => {
 }
 .contact-form .btn {
   justify-self: start;
+}
+.contact-form .btn:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+}
+.form-feedback {
+  margin: -4px 0 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.form-feedback.success {
+  color: #18794e;
+}
+.form-feedback.error {
+  color: #c43d4b;
 }
 @media (max-width: 860px) {
   .collab-grid {

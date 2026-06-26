@@ -171,7 +171,7 @@ const benefits = [
           <h3>{{ director.name }}</h3>
           <p class="role">{{ director.role }}</p>
           <p class="bio">{{ director.bio }}</p>
-          <a href="mailto:president@spaigi.uz" class="mail">president@spaigi.uz</a>
+          <router-link :to="{ path: '/', hash: '#contact' }" class="mail">president@spaigi.uz</router-link>
         </div>
       </article>
 

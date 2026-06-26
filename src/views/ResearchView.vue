@@ -27,7 +27,7 @@ const publications = [
     author: 'Mansur Omonov',
     desc: 'A systematic analysis of public diplomacy and cultural relations in strengthening cooperation among Central Asian states — examining soft-power instruments for regional security and stability within Uzbekistan’s foreign-policy framework.',
     tags: ['Regional integration', 'Cultural relations', 'Foreign policy'],
-    action: { label: 'Request details', href: 'mailto:contact@spaigi.uz?subject=Public%20Diplomacy%20book' },
+    action: { label: 'Request details' },
   },
   {
     type: 'Expert Analysis',
@@ -36,7 +36,7 @@ const publications = [
     author: 'Sh. Ziyoyev · Political Scientist, SPAIGI Expert',
     desc: 'An assessment of US–Iran tensions in the Middle East and their implications for Central Asia — including mediation dynamics, energy and logistics stability, and Uzbekistan’s strategic-partnership and survival interests.',
     tags: ['Geopolitics', 'Security', 'Central Asia'],
-    action: { label: 'Read more', href: 'mailto:contact@spaigi.uz?subject=US-Iran%20analysis' },
+    action: { label: 'Read more' },
   },
   {
     type: 'Book',
@@ -45,7 +45,7 @@ const publications = [
     author: 'Mansur S. Omonov',
     desc: 'Based on an international research project on effective management and innovation in public-sector organizations — covering digital transformation, leadership, motivation, and global best practices across three parts and six chapters.',
     tags: ['Digital transformation', 'Leadership', 'Best practices'],
-    action: { label: 'Request details', href: 'mailto:contact@spaigi.uz?subject=Innovation%20book' },
+    action: { label: 'Request details' },
   },
   {
     type: 'Report',
@@ -54,7 +54,7 @@ const publications = [
     author: 'Dr. Mansur Omonov · SPAIGI Expert',
     desc: 'Analysis of geo-economic opportunities and institutional reforms in the Uzbekistan–U.S. strategic partnership. The full version is available as a PDF on request.',
     tags: ['Geo-economics', 'Reforms', 'Partnership'],
-    action: { label: 'Request the PDF', href: 'mailto:contact@spaigi.uz?subject=Uzbekistan-US%20report%20PDF' },
+    action: { label: 'Request the PDF' },
   },
 ]
 </script>
@@ -127,7 +127,9 @@ const publications = [
               <div class="tags">
                 <span v-for="t in p.tags" :key="t">{{ t }}</span>
               </div>
-              <a :href="p.action.href" class="link">{{ p.action.label }} <span class="arrow">→</span></a>
+              <router-link :to="{ path: '/', hash: '#contact' }" class="link">
+                {{ p.action.label }} <span class="arrow">→</span>
+              </router-link>
             </div>
           </article>
         </div>

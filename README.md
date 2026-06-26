@@ -1,5 +1,38 @@
-# Vue 3 + Vite
+# SPAIGI Web
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Vue 3 and Vite frontend for the SPAIGI website.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Frontend
+
+```bash
+npm install
+npm run dev
+npm run build
+```
+
+During local development, Vite proxies `/api/*` to the Spring Boot backend at
+`http://localhost:8080`.
+
+## Backend
+
+The contact backend is separate from this frontend repo and lives next to it:
+
+```bash
+cd ../spaigi-backend
+mvn spring-boot:run
+```
+
+The contact form posts to `/api/contact`; Nginx or Docker Compose must proxy `/api/` to the
+backend service in production.
+
+Example Nginx block:
+
+```nginx
+location /api/ {
+  proxy_pass http://127.0.0.1:8080/api/;
+  proxy_set_header Host $host;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto $scheme;
+}
+```
